@@ -42,7 +42,7 @@ Dexora is an **unofficial fan-made project** created solely for educational, dev
 
 Pokémon and all related names, characters, artwork, audio, trademarks, and other intellectual property are the property of their respective rights holders.
 
-Some visual references and trainer portraits used by the project may originate from third-party Pokémon resources, including [Poképédia](https://www.pokepedia.fr/). Their inclusion does not imply ownership by or affiliation with Dexora.
+Some visual references and trainer portraits used in the project are sourced from third-party Pokémon resources, including [Poképédia](https://www.pokepedia.fr/).
 
 Dexora is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, Creatures, PokéAPI, or Poképédia.
 
