@@ -1,5 +1,7 @@
 # Dexora
 
+Dexora is an unofficial, non-commercial portfolio project created for educational and demonstration purposes. Pokémon and related characters, names, artwork, and other intellectual property belong to their respective rights holders. Dexora is not affiliated with or endorsed by The Pokémon Company, Nintendo, Game Freak, or Creatures. Pokémon data is provided through PokéAPI.
+
 Dexora is a Pokémon encyclopedia built with **ASP.NET Core MVC**. Explore Pokémon, learn about their abilities and type matchups, save your favorites, and browse trainer teams from the games and anime.
 
 ## Features
