@@ -1,8 +1,8 @@
 # Dexora
 
-Dexora is an **unofficial, non-commercial portfolio project** created for educational and demonstration purposes.
+Dexora is an **unofficial, non-commercial fan-made portfolio project** created for educational, development, and demonstration purposes.
 
-Pokémon and related characters, names, artwork, audio, and other intellectual property belong to their respective rights holders. Dexora is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, or Creatures.
+Pokémon and all related names, characters, artwork, audio, trademarks, and other intellectual property are the property of their respective rights holders. Dexora is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, or Creatures.
 
 ## About
 
@@ -30,20 +30,33 @@ Dexora is a Pokémon encyclopedia built with **ASP.NET Core MVC**. It allows use
 * JavaScript
 * PokéAPI
 
-## Data
+## Data & External Resources
 
-Pokémon information is provided through [PokéAPI](https://pokeapi.co/).
+Pokémon data is primarily provided through [PokéAPI](https://pokeapi.co/).
 
-Some additional profile information that is not available through the API, such as selected food preferences and other supplemental details, is maintained locally within the project.
+Pokémon artwork, sprites, item images, and cry audio used by the application may be loaded from resources associated with PokéAPI, including its public sprite and cry repositories.
 
-## Credits & Disclaimer
+Some supplemental information that is not available through PokéAPI, such as selected food preferences and other profile details, is maintained locally within the project.
 
-Dexora is an **unofficial fan-made project** created solely for educational, development, and portfolio demonstration purposes.
+Dexora also uses or references community resources for selected supplemental content, including:
 
-Pokémon and all related names, characters, artwork, audio, trademarks, and other intellectual property are the property of their respective rights holders.
+* **Pokémon Showdown** — reference data for selected signature Z-Moves.
+* **Serebii** — selected supplemental Pokémon food and item imagery/information.
+* **Poképédia** — source/reference for selected trainer portraits.
+* **Bulbapedia** — reference material for selected trainer and anime team information.
 
-Some visual references and trainer portraits used in the project are sourced from third-party Pokémon resources, including [Poképédia](https://www.pokepedia.fr/).
+These third-party resources remain subject to their respective terms, licenses, copyrights, and ownership.
 
-Dexora is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, Creatures, PokéAPI, or Poképédia.
+## Copyright & Disclaimer
 
-No commercial use of Pokémon intellectual property is intended.
+Dexora is an **unofficial fan-made project** created solely for educational, development, and portfolio demonstration purposes. It is not intended to represent an official Pokémon product or service.
+
+Pokémon and all related names, characters, designs, artwork, sprites, audio, trademarks, and other intellectual property are the property of their respective rights holders.
+
+Dexora does not claim ownership of Pokémon intellectual property or third-party assets and content referenced or displayed by the project.
+
+Third-party names, images, data, and other resources remain the property of their respective owners. Attribution or reference to a third-party source does not imply ownership, endorsement, sponsorship, affiliation, or that the material is free from copyright or other intellectual-property restrictions.
+
+Dexora is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, Creatures, PokéAPI, Pokémon Showdown, Serebii, Poképédia, or Bulbapedia.
+
+No commercial use of Pokémon intellectual property is intended. Dexora is maintained as a personal software-development portfolio project demonstrating technologies such as ASP.NET Core MVC, C#, Razor, JavaScript, responsive web development, and API integration.
