@@ -1,0 +1,34 @@
+alder: https://www.pokepedia.fr/images/thumb/f/f6/Goyah-NB.png/200px-Goyah-NB.png
+ash: https://www.pokepedia.fr/images/thumb/a/ae/Sacha-Anim%C3%A9_LV.png/175px-Sacha-Anim%C3%A9_LV.png
+blue: https://www.pokepedia.fr/images/thumb/8/87/Blue-LGPE.png/175px-Blue-LGPE.png
+bonnie: https://www.pokepedia.fr/images/1/17/Clem-Anim%C3%A9_XY.png
+brock: https://www.pokepedia.fr/images/3/34/Pierre-Anim%C3%A9_EP.png
+chloe: https://www.pokepedia.fr/images/thumb/7/7c/Chlo%C3%A9-Anim%C3%A9_LV.png/150px-Chlo%C3%A9-Anim%C3%A9_LV.png | https://www.pokepedia.fr/Chlo%C3%A9
+cilan: https://www.pokepedia.fr/images/9/9a/Rachid-Anim%C3%A9_NB.png
+clemont: https://www.pokepedia.fr/images/b/bd/Lem-Anim%C3%A9_XY.png
+cynthia: https://www.pokepedia.fr/images/thumb/9/9a/Cynthia-DEPS.png/225px-Cynthia-DEPS.png
+dawn: https://www.pokepedia.fr/images/thumb/3/38/Aurore-Anim%C3%A9_DP.png/125px-Aurore-Anim%C3%A9_DP.png | https://www.pokepedia.fr/Aurore_(dessin_anim%C3%A9)
+diantha: https://www.pokepedia.fr/images/thumb/c/cc/Dianth%C3%A9a-XY.png/250px-Dianth%C3%A9a-XY.png
+dot: https://www.pokepedia.fr/images/thumb/b/bd/Dot_%28%C3%A2g%C3%A9e%29-Anim%C3%A9_LH.png/180px-Dot_%28%C3%A2g%C3%A9e%29-Anim%C3%A9_LH.png
+geeta: https://www.pokepedia.fr/images/thumb/a/a2/Alisma-EV.png/175px-Alisma-EV.png
+goh: https://www.pokepedia.fr/images/thumb/6/6a/Goh-Anim%C3%A9_LV.png/140px-Goh-Anim%C3%A9_LV.png | https://www.pokepedia.fr/Goh
+iris: https://www.pokepedia.fr/images/thumb/c/c0/Iris-N2B2.png/300px-Iris-N2B2.png
+iris-anime: https://www.pokepedia.fr/images/thumb/f/f3/Iris-Anim%C3%A9_LV.png/300px-Iris-Anim%C3%A9_LV.png | https://www.pokepedia.fr/Iris_(dessin_anim%C3%A9)
+james: https://www.pokepedia.fr/images/thumb/9/94/James-Anim%C3%A9_LV.png/150px-James-Anim%C3%A9_LV.png | https://www.pokepedia.fr/James
+jessie: https://www.pokepedia.fr/images/thumb/0/02/Jessie-Anim%C3%A9_LV.png/200px-Jessie-Anim%C3%A9_LV.png | https://www.pokepedia.fr/Jessie
+kiawe: https://www.pokepedia.fr/images/4/48/Kiawe-Anim%C3%A9_SL.png
+kukui: https://www.pokepedia.fr/images/thumb/1/1d/Professeur_Euphorbe-SL.png/175px-Professeur_Euphorbe-SL.png
+lana: https://www.pokepedia.fr/images/b/b4/N%C3%A9phie-Anim%C3%A9_SL.png
+lance: https://www.pokepedia.fr/images/thumb/e/e3/Peter-LGPE.png/250px-Peter-LGPE.png
+leon: https://www.pokepedia.fr/images/thumb/7/7b/Tarak-EB.png/300px-Tarak-EB.png
+liko: https://www.pokepedia.fr/images/thumb/c/cc/Liko_%28%C3%A2g%C3%A9e%29-Anim%C3%A9_LH.png/225px-Liko_%28%C3%A2g%C3%A9e%29-Anim%C3%A9_LH.png
+lillie: https://www.pokepedia.fr/images/3/36/Lilie-Anim%C3%A9_SL.png
+mallow: https://www.pokepedia.fr/images/2/25/Barbara-Anim%C3%A9_SL.png
+may: https://www.pokepedia.fr/images/b/bc/Flora-Anim%C3%A9_AG.png
+misty: https://www.pokepedia.fr/images/2/20/Ondine-Anim%C3%A9_EP.png
+roy: https://www.pokepedia.fr/images/thumb/9/93/Rhod_%28%C3%A2g%C3%A9%29-Anim%C3%A9_LH.png/150px-Rhod_%28%C3%A2g%C3%A9%29-Anim%C3%A9_LH.png
+serena: https://www.pokepedia.fr/images/8/8d/Serena_%28cheveux_courts%29-Anim%C3%A9_XY.png
+sophocles: https://www.pokepedia.fr/images/8/81/Chrys-Anim%C3%A9_SL.png
+steven: https://www.pokepedia.fr/images/thumb/b/b7/Pierre_Rochard-ROSA.png/203px-Pierre_Rochard-ROSA.png
+tracey: https://www.pokepedia.fr/images/thumb/b/b9/LV147_-_Jacky.png/325px-LV147_-_Jacky.png
+wallace: https://www.pokepedia.fr/images/thumb/b/b1/Marc-ROSA.png/230px-Marc-ROSA.png
