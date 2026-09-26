@@ -48,40 +48,74 @@ const COLORS = {
 // https://github.com/smogon/pokemon-showdown/blob/master/data/items.ts
 // Match exact PokéAPI form names; generic type-based Z-Moves are not listed.
 const SIGNATURE_Z_MOVES = [
-    { forms: ["pikachu"],
-        name: "Catastropika", crystal: "Pikanium Z", move: "Volt Tackle" },
-    { forms: ["pikachu-original-cap","pikachu-hoenn-cap","pikachu-sinnoh-cap","pikachu-unova-cap","pikachu-kalos-cap","pikachu-alola-cap","pikachu-partner-cap"],
-        name: "10,000,000 Volt Thunderbolt", crystal: "Pikashunium Z", move: "Thunderbolt" },
-    { forms: ["raichu-alola"],
-        name: "Stoked Sparksurfer", crystal: "Aloraichium Z", move: "Thunderbolt" },
-    { forms: ["eevee"],
-        name: "Extreme Evoboost", crystal: "Eevium Z", move: "Last Resort" },
-    { forms: ["snorlax"],
-        name: "Pulverizing Pancake", crystal: "Snorlium Z", move: "Giga Impact" },
-    { forms: ["mew"],
-        name: "Genesis Supernova", crystal: "Mewnium Z", move: "Psychic" },
-    { forms: ["decidueye"],
-        name: "Sinister Arrow Raid", crystal: "Decidium Z", move: "Spirit Shackle" },
-    { forms: ["incineroar"],
-        name: "Malicious Moonsault", crystal: "Incinium Z", move: "Darkest Lariat" },
-    { forms: ["primarina"],
-        name: "Oceanic Operetta", crystal: "Primarium Z", move: "Sparkling Aria" },
-    { forms: ["tapu-koko","tapu-lele","tapu-bulu","tapu-fini"],
-        name: "Guardian of Alola", crystal: "Tapunium Z", move: "Nature's Madness" },
-    { forms: ["marshadow"],
-        name: "Soul-Stealing 7-Star Strike", crystal: "Marshadium Z", move: "Spectral Thief" },
-    { forms: ["kommo-o","kommo-o-totem"],
-        name: "Clangorous Soulblaze", crystal: "Kommonium Z", move: "Clanging Scales" },
-    { forms: ["lycanroc-midday","lycanroc-midnight","lycanroc-dusk"],
-        name: "Splintered Stormshards", crystal: "Lycanium Z", move: "Stone Edge" },
-    { forms: ["mimikyu-disguised","mimikyu-busted","mimikyu-totem-disguised","mimikyu-totem-busted"],
-        name: "Let's Snuggle Forever", crystal: "Mimikium Z", move: "Play Rough" },
-    { forms: ["solgaleo","necrozma-dusk"],
-        name: "Searing Sunraze Smash", crystal: "Solganium Z", move: "Sunsteel Strike" },
-    { forms: ["lunala","necrozma-dawn"],
-        name: "Menacing Moonraze Maelstrom", crystal: "Lunalium Z", move: "Moongeist Beam" },
-    { forms: ["necrozma-ultra"],
-        name: "Light That Burns the Sky", crystal: "Ultranecrozium Z", move: "Photon Geyser" }
+    {
+        forms: ["pikachu"],
+        name: "Catastropika", crystal: "Pikanium Z", move: "Volt Tackle"
+    },
+    {
+        forms: ["pikachu-original-cap", "pikachu-hoenn-cap", "pikachu-sinnoh-cap", "pikachu-unova-cap", "pikachu-kalos-cap", "pikachu-alola-cap", "pikachu-partner-cap"],
+        name: "10,000,000 Volt Thunderbolt", crystal: "Pikashunium Z", move: "Thunderbolt"
+    },
+    {
+        forms: ["raichu-alola"],
+        name: "Stoked Sparksurfer", crystal: "Aloraichium Z", move: "Thunderbolt"
+    },
+    {
+        forms: ["eevee"],
+        name: "Extreme Evoboost", crystal: "Eevium Z", move: "Last Resort"
+    },
+    {
+        forms: ["snorlax"],
+        name: "Pulverizing Pancake", crystal: "Snorlium Z", move: "Giga Impact"
+    },
+    {
+        forms: ["mew"],
+        name: "Genesis Supernova", crystal: "Mewnium Z", move: "Psychic"
+    },
+    {
+        forms: ["decidueye"],
+        name: "Sinister Arrow Raid", crystal: "Decidium Z", move: "Spirit Shackle"
+    },
+    {
+        forms: ["incineroar"],
+        name: "Malicious Moonsault", crystal: "Incinium Z", move: "Darkest Lariat"
+    },
+    {
+        forms: ["primarina"],
+        name: "Oceanic Operetta", crystal: "Primarium Z", move: "Sparkling Aria"
+    },
+    {
+        forms: ["tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini"],
+        name: "Guardian of Alola", crystal: "Tapunium Z", move: "Nature's Madness"
+    },
+    {
+        forms: ["marshadow"],
+        name: "Soul-Stealing 7-Star Strike", crystal: "Marshadium Z", move: "Spectral Thief"
+    },
+    {
+        forms: ["kommo-o", "kommo-o-totem"],
+        name: "Clangorous Soulblaze", crystal: "Kommonium Z", move: "Clanging Scales"
+    },
+    {
+        forms: ["lycanroc-midday", "lycanroc-midnight", "lycanroc-dusk"],
+        name: "Splintered Stormshards", crystal: "Lycanium Z", move: "Stone Edge"
+    },
+    {
+        forms: ["mimikyu-disguised", "mimikyu-busted", "mimikyu-totem-disguised", "mimikyu-totem-busted"],
+        name: "Let's Snuggle Forever", crystal: "Mimikium Z", move: "Play Rough"
+    },
+    {
+        forms: ["solgaleo", "necrozma-dusk"],
+        name: "Searing Sunraze Smash", crystal: "Solganium Z", move: "Sunsteel Strike"
+    },
+    {
+        forms: ["lunala", "necrozma-dawn"],
+        name: "Menacing Moonraze Maelstrom", crystal: "Lunalium Z", move: "Moongeist Beam"
+    },
+    {
+        forms: ["necrozma-ultra"],
+        name: "Light That Burns the Sky", crystal: "Ultranecrozium Z", move: "Photon Geyser"
+    }
 ];
 
 function renderSignatureZMove(pokemon) {
@@ -142,6 +176,45 @@ let list = [];
 let enriched = new Map();
 let current = 'home';
 let pokemonFoodDataPromise;
+let shinyAudioContext;
+let shinySoundBuffer;
+let shinySoundLoading;
+let shinySoundSource;
+
+function prepareShinySound() {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        shinyAudioContext ||= new AudioContext();
+        shinySoundLoading ||= fetch('/media/sounds/legends-arceus-shiny.mp3')
+            .then(response => {
+                if (!response.ok) throw new Error('Shiny sound could not be loaded');
+                return response.arrayBuffer();
+            })
+            .then(bytes => shinyAudioContext.decodeAudioData(bytes))
+            .then(buffer => { shinySoundBuffer = buffer; })
+            .catch(() => { shinySoundLoading = null; });
+        return Promise.all([shinyAudioContext.resume(), shinySoundLoading]).catch(() => { });
+    } catch {
+        // Audio support must not prevent changing the Pokémon's appearance.
+    }
+}
+
+function playShinySound() {
+    const context = shinyAudioContext;
+    if (!context || context.state !== 'running' || !shinySoundBuffer) return;
+
+    shinySoundSource?.stop();
+    const source = context.createBufferSource();
+    source.buffer = shinySoundBuffer;
+    source.connect(context.destination);
+    source.onended = () => {
+        source.disconnect();
+        if (shinySoundSource === source) shinySoundSource = null;
+    };
+    shinySoundSource = source;
+    source.start();
+}
 
 
 /* =========================================================
@@ -859,6 +932,10 @@ document.addEventListener('click', event => {
     event.preventDefault();
 
     navigate(button.dataset.page);
+
+    if (button.closest('.mobile-nav')) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
 });
 
 document.addEventListener('wheel', event => {
@@ -1138,11 +1215,14 @@ function home() {
                 </p>
 
                 <div class="search">
-                    <span>⌕</span>
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="10.5" cy="10.5" r="7.5" />
+                        <path d="m16 16 5 5" />
+                    </svg>
 
                     <input
                         id="heroSearch"
-                        placeholder="Search Pokémon by name or number..."
+                        placeholder="Search Pokémon by name or number"
                     >
                 </div>
             </div>
@@ -1275,7 +1355,10 @@ async function pokedex(
 
         <div class="toolbar tag-toolbar">
             <div class="search">
-                <span>⌕</span>
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="10.5" cy="10.5" r="7.5" />
+                        <path d="m16 16 5 5" />
+                    </svg>
 
                 <input
                     id="q"
@@ -2001,10 +2084,9 @@ async function showDetail(id) {
         })
         .filter(variant => Number.isFinite(variant.id));
 
-    const artwork =
-        pokemon.sprites
-            .other['official-artwork']
-            .front_default;
+    const officialArtwork = pokemon.sprites?.other?.['official-artwork'];
+    const artwork = officialArtwork?.front_default || pokemon.sprites?.front_default;
+    const shinyArtwork = officialArtwork?.front_shiny || pokemon.sprites?.front_shiny;
 
     const animatedSprite = artwork;
     const cryUrl = pokemon.cries?.latest ||
@@ -2036,6 +2118,8 @@ async function showDetail(id) {
                 <h1>
                     ${cap(displayPokemonName(pokemon.name))}
                 </h1>
+
+                <span class="shiny-status" data-shiny-status role="status"></span>
 
                 <div>
                     ${types
@@ -2151,6 +2235,16 @@ async function showDetail(id) {
                 <span class="pokeball-icon"></span>
             </button>
 
+            <button class="shiny-toggle" type="button" data-shiny-toggle
+                    aria-label="${shinyArtwork ? 'Show shiny' : 'Shiny unavailable'}"
+                    title="${shinyArtwork ? 'Show shiny' : 'Shiny unavailable'}"
+                    aria-pressed="false" ${shinyArtwork ? '' : 'disabled'}>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="m10 3 2.5 6.5L19 12l-6.5 2.5L10 21l-2.5-6.5L1 12l6.5-2.5Z" />
+                    <path d="m19 1 1.1 2.9L23 5l-2.9 1.1L19 9l-1.1-2.9L15 5l2.9-1.1Z" />
+                </svg>
+            </button>
+
         </section>
 
         <div class="details-grid">
@@ -2239,7 +2333,7 @@ async function showDetail(id) {
                             <b>Preferred foods</b>
                             <div class="food-chips">
                                 ${legendsFood?.foods?.map(food => foodImageChip(food, 'pla')).join('') || ''}
-                        
+                       
                                 ${sleepBerry ? foodImageChip(`${sleepBerry} Berry`, 'berry') : ''}
                             </div>
                         </div>
@@ -2373,6 +2467,61 @@ async function showDetail(id) {
     rememberViewedPokemon(pokemon, species);
     setupProfileMedia();
 
+    const shinyButton = app.querySelector('[data-shiny-toggle]');
+    const profileMedia = app.querySelector('.profile-cinematic');
+    const profileImage = profileMedia.querySelector('.profile-clean-animation');
+    const backdrop = profileMedia.querySelector('.profile-hd-backdrop');
+    const profileVideo = profileMedia.querySelector('video');
+    let showingShiny = false;
+    let shinySoundPending = false;
+
+    const playLoadedShinySound = () => {
+        if (!shinySoundPending || !showingShiny || !profileImage.isConnected ||
+            !profileImage.complete || !profileImage.naturalWidth ||
+            profileImage.currentSrc !== shinyArtwork ||
+            shinyAudioContext?.state !== 'running' || !shinySoundBuffer) return;
+        shinySoundPending = false;
+        playShinySound();
+    };
+
+    profileImage.addEventListener('load', playLoadedShinySound);
+
+    const updateAppearance = () => {
+        const image = showingShiny ? shinyArtwork : artwork;
+        profileImage.src = image;
+        backdrop.src = image;
+        profileImage.alt = `${showingShiny ? 'Shiny ' : ''}${cap(displayPokemonName(pokemon.name))}`;
+        profileMedia.classList.toggle('is-shiny', showingShiny);
+        shinyButton.setAttribute('aria-pressed', String(showingShiny));
+        shinyButton.title = showingShiny ? 'Show normal' : 'Show shiny';
+        shinyButton.setAttribute('aria-label', shinyButton.title);
+        if (showingShiny) {
+            profileVideo?.pause();
+        } else if (profileVideo?.classList.contains('is-ready')) {
+            profileVideo.play().catch(() => { });
+        }
+    };
+
+    shinyButton.addEventListener('click', () => {
+        if (!shinyArtwork || shinyButton.disabled) return;
+        showingShiny = !showingShiny;
+        shinySoundPending = showingShiny;
+        if (showingShiny) prepareShinySound()?.then(playLoadedShinySound);
+        updateAppearance();
+        if (showingShiny) requestAnimationFrame(playLoadedShinySound);
+    });
+
+    profileImage.addEventListener('error', () => {
+        if (!showingShiny) return;
+        shinySoundPending = false;
+        showingShiny = false;
+        updateAppearance();
+        shinyButton.disabled = true;
+        shinyButton.title = 'Shiny unavailable';
+        shinyButton.setAttribute('aria-label', shinyButton.title);
+        app.querySelector('[data-shiny-status]').textContent = 'The shiny image could not be loaded.';
+    });
+
     const cryButton = app.querySelector('[data-pokemon-cry]');
     if (cryButton) {
         let cryAudio;
@@ -2468,7 +2617,7 @@ const TRAINERS = [
         series: "Original Series — Kanto",
         source: "Anime",
         game: "Kanto team",
-        team: [120,54,175],
+        team: [120, 54, 175],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Misty_(anime)"
     },
 
@@ -2481,7 +2630,7 @@ const TRAINERS = [
         series: "Original Series — Kanto",
         source: "Anime",
         game: "Kanto team",
-        team: [95,74,37],
+        team: [95, 74, 37],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Brock_(anime)"
     },
 
@@ -2494,7 +2643,7 @@ const TRAINERS = [
         series: "Diamond & Pearl",
         source: "Anime",
         game: "Sinnoh team",
-        team: [185,453,440],
+        team: [185, 453, 440],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Brock_(anime)"
     },
 
@@ -2507,7 +2656,7 @@ const TRAINERS = [
         series: "Advanced Generation",
         source: "Anime",
         game: "Hoenn team",
-        team: [257,267,300,446],
+        team: [257, 267, 300, 446],
         reference: "https://bulbapedia.bulbagarden.net/wiki/May_(anime)"
     },
 
@@ -2520,7 +2669,7 @@ const TRAINERS = [
         series: "Diamond & Pearl",
         source: "Anime",
         game: "Sinnoh team",
-        team: [393,427,417,473,155,468],
+        team: [393, 427, 417, 473, 155, 468],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Dawn_(anime)"
     },
 
@@ -2533,7 +2682,7 @@ const TRAINERS = [
         series: "Black & White",
         source: "Anime",
         game: "Unova team",
-        team: [610,530,587,149],
+        team: [610, 530, 587, 149],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Iris_(anime)"
     },
 
@@ -2546,7 +2695,7 @@ const TRAINERS = [
         series: "Black & White",
         source: "Anime",
         game: "Unova team",
-        team: [511,558,618],
+        team: [511, 558, 618],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Cilan_(anime)"
     },
 
@@ -2559,7 +2708,7 @@ const TRAINERS = [
         series: "XY",
         source: "Anime",
         game: "Kalos team",
-        team: [654,674,700],
+        team: [654, 674, 700],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Serena_(anime)"
     },
 
@@ -2572,7 +2721,7 @@ const TRAINERS = [
         series: "XY",
         source: "Anime",
         game: "Kalos team",
-        team: [659,650,405],
+        team: [659, 650, 405],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Clemont_(anime)"
     },
 
@@ -2600,7 +2749,7 @@ const TRAINERS = [
         game: "Alola team",
         team: [10103],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Lillie_(anime)",
-        teamNames: {"10103":"Alolan Vulpix"}
+        teamNames: { "10103": "Alolan Vulpix" }
     },
 
     {
@@ -2612,7 +2761,7 @@ const TRAINERS = [
         series: "Sun & Moon",
         source: "Anime",
         game: "Alola team",
-        team: [730,133],
+        team: [730, 133],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Lana_(anime)"
     },
 
@@ -2638,9 +2787,9 @@ const TRAINERS = [
         series: "Sun & Moon",
         source: "Anime",
         game: "Alola team",
-        team: [776,10115,6],
+        team: [776, 10115, 6],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Kiawe_(anime)",
-        teamNames: {"10115":"Alolan Marowak"}
+        teamNames: { "10115": "Alolan Marowak" }
     },
 
     {
@@ -2652,7 +2801,7 @@ const TRAINERS = [
         series: "Sun & Moon",
         source: "Anime",
         game: "Alola team",
-        team: [777,738],
+        team: [777, 738],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Sophocles_(anime)"
     },
 
@@ -2665,7 +2814,7 @@ const TRAINERS = [
         series: "Journeys",
         source: "Anime",
         game: "Journeys team",
-        team: [815,818,810],
+        team: [815, 818, 810],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Goh"
     },
 
@@ -2691,7 +2840,7 @@ const TRAINERS = [
         series: "Original Series — Kanto",
         source: "Anime",
         game: "Kanto team",
-        team: [24,108],
+        team: [24, 108],
         reference: "https://bulbapedia.bulbagarden.net/wiki/Jessie"
     },
 
@@ -2704,7 +2853,7 @@ const TRAINERS = [
         series: "Original Series — Kanto",
         source: "Anime",
         game: "Kanto team",
-        team: [110,71],
+        team: [110, 71],
         reference: "https://bulbapedia.bulbagarden.net/wiki/James"
     },
 
@@ -3067,7 +3216,10 @@ function trainersPage() {
 
         <div class="toolbar">
             <div class="search">
-                <span>⌕</span>
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="10.5" cy="10.5" r="7.5" />
+                        <path d="m16 16 5 5" />
+                    </svg>
 
                 <input
                     id="trainerQ"

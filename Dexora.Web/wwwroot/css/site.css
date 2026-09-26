@@ -160,7 +160,7 @@ main {
 
 .hero h1 {
     font-size: 58px;
-    line-height: 1;
+    line-height: 1.2;
     margin: 8px 0 20px;
 }
 
@@ -187,13 +187,25 @@ main {
 
 .search {
     display: flex;
+    align-items: center;
     background: transparent;
     border: 1px solid #10203a;
     border-radius: 14px;
     padding: 14px 18px;
-    gap: 12px;
+    gap: 10px;
     max-width: 520px;
     margin-top: 25px;
+}
+
+.search-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
 }
 
 .search input {
@@ -1209,6 +1221,70 @@ footer {
     background: var(--red);
     color: #fff;
     font-size: 10px;
+}
+
+.shiny-toggle {
+    position: absolute;
+    top: 86px;
+    right: 30px;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.094);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s, background 0.2s;
+}
+
+    .shiny-toggle svg {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+    }
+
+    .shiny-toggle:focus-visible {
+        outline: 2px solid #facc15;
+        outline-offset: 3px;
+    }
+
+@media(max-width:600px) {
+    .shiny-toggle {
+        top: 70px;
+        right: 18px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+.shiny-toggle[aria-pressed="true"] {
+    background: #facc15;
+    color: #1c1917;
+}
+
+.shiny-toggle:disabled {
+    opacity: .65;
+    cursor: default;
+}
+
+.shiny-status {
+    display: block;
+    font-size: 13px;
+}
+
+.profile-cinematic.is-shiny .profile-battle-video {
+    display: none;
+}
+
+.profile-cinematic.is-shiny .profile-cinematic-fallback {
+    display: block !important;
+    opacity: 1;
+    visibility: visible;
 }
 
 .mobile-nav {
@@ -2236,6 +2312,7 @@ footer {
         height: auto;
         max-height: 210px;
         object-fit: contain;
+        margin-bottom: 1rem;
     }
 
     .grid {
