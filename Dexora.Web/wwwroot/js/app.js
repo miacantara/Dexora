@@ -2435,6 +2435,7 @@ async function showDetail(id) {
         .querySelectorAll('[data-evo]')
         .forEach(element => {
             element.onclick = () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 showDetail(
                     element.dataset.evo
                 );
