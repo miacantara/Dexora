@@ -2203,6 +2203,7 @@ footer {
 
     header.topbar {
         padding-inline: 14px;
+        justify-content: space-between;
     }
 
     .topbar .brand {
