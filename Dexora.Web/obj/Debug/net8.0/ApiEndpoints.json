@@ -1,0 +1,50 @@
+[
+  {
+    "ContainingType": "Dexora.Web.Controllers.PokemonController",
+    "Method": "Detail",
+    "RelativePath": "api/pokemon/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Dexora.Web.Controllers.PokemonController",
+    "Method": "List",
+    "RelativePath": "api/pokemon/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Dexora.Web.Controllers.PokemonController",
+    "Method": "Type",
+    "RelativePath": "api/pokemon/type/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -3,6 +3,7 @@ using Dexora.Web.Services;
 namespace Dexora.Web.Controllers;
 [ApiController]
 [Route("api/pokemon")]
+[ResponseCache(Duration = 3600, Location = ResponseCacheLocation.Any)]
 public class PokemonController(PokeApiService service) : ControllerBase
 {
     [HttpGet("list")]

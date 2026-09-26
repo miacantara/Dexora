@@ -618,14 +618,18 @@ function recommendedItems(pokemon) {
    API
    ========================================================= */
 
-async function json(url) {
-    const response = await fetch(url);
+const pendingJsonRequests = new Map();
 
-    if (!response.ok) {
-        throw new Error('Request failed');
+function json(url) {
+    if (!pendingJsonRequests.has(url)) {
+        const request = fetch(url).then(response => {
+            if (!response.ok) throw new Error('Request failed');
+            return response.json();
+        }).finally(() => pendingJsonRequests.delete(url));
+        pendingJsonRequests.set(url, request);
     }
 
-    return response.json();
+    return pendingJsonRequests.get(url);
 }
 
 async function getFull(id) {
@@ -1571,7 +1575,6 @@ async function showType(name) {
             style="--accent:${COLORS[name]}"
         >
             <div>
-                <small>POKÉMON TYPE</small>
 
                 <h1>${cap(name)} Type</h1>
 
@@ -1831,10 +1834,11 @@ async function showDetail(id) {
         </div>
     `;
 
-    let data;
+    let data, foodData;
     try {
-        data = await getFull(id);
+        [data, foodData] = await Promise.all([getFull(id), getPokemonFoodData()]);
     } catch (error) {
+
         console.error('Unable to load Pokémon details:', error);
         app.innerHTML = `
             <section class="panel wide">
@@ -1849,7 +1853,6 @@ async function showDetail(id) {
 
     const pokemon = data.pokemon;
     const species = data.species;
-    const foodData = await getPokemonFoodData();
     const speciesNumber = String(species.id).padStart(3, '0');
     const sleepFoodRecord = foodData.pokemonSleep?.[speciesNumber] || null;
     const sleepType = foodData.pokemonSleepTypes?.[speciesNumber];
@@ -2015,7 +2018,7 @@ async function showDetail(id) {
             ‹ Back to Pokédex
         </button>
 
-        <section class="profile" style="--accent:${COLORS[types[0]]}">
+        <section class="profile pokemon-profile" style="--accent:${COLORS[types[0]]}">
 
              <button class="fact-cry" type="button" data-pokemon-cry="${cryUrl}" aria-label="Play ${cap(displayPokemonName(pokemon.name))}'s sound">
 
