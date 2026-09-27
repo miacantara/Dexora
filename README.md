@@ -1,12 +1,12 @@
-# Dexora
+# KETCHUMP
 
-Dexora is an **unofficial, non-commercial fan-made portfolio project** created for educational, development, and demonstration purposes.
+KETCHUMP is an **unofficial, non-commercial fan-made portfolio project** created for educational, development, and demonstration purposes.
 
-Pokémon and all related names, characters, artwork, audio, trademarks, and other intellectual property are the property of their respective rights holders. Dexora is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, or Creatures.
+Pokémon and all related names, characters, artwork, audio, trademarks, and other intellectual property are the property of their respective rights holders. KETCHUMP is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, or Creatures.
 
 ## About
 
-Dexora is a Pokémon encyclopedia built with **ASP.NET Core MVC**. It allows users to explore Pokémon, learn about their abilities and type matchups, save favorites, and browse trainer teams from the games and anime.
+KETCHUMP is a Pokémon encyclopedia built with **ASP.NET Core MVC**. It allows users to explore Pokémon, learn about their abilities and type matchups, save favorites, and browse trainer teams from the games and anime.
 
 ## Features
 
@@ -38,7 +38,7 @@ Pokémon artwork, sprites, item images, and cry audio used by the application ma
 
 Some supplemental information that is not available through PokéAPI, such as selected food preferences and other profile details, is maintained locally within the project.
 
-Dexora also uses or references community resources for selected supplemental content, including:
+KETCHUMP also uses or references community resources for selected supplemental content, including:
 
 * **Pokémon Showdown** — reference data for selected signature Z-Moves.
 * **Serebii** — selected supplemental Pokémon food and item imagery/information.
@@ -49,14 +49,14 @@ These third-party resources remain subject to their respective terms, licenses, 
 
 ## Copyright & Disclaimer
 
-Dexora is an **unofficial fan-made project** created solely for educational, development, and portfolio demonstration purposes. It is not intended to represent an official Pokémon product or service.
+KETCHUMP is an **unofficial fan-made project** created solely for educational, development, and portfolio demonstration purposes. It is not intended to represent an official Pokémon product or service.
 
 Pokémon and all related names, characters, designs, artwork, sprites, audio, trademarks, and other intellectual property are the property of their respective rights holders.
 
-Dexora does not claim ownership of Pokémon intellectual property or third-party assets and content referenced or displayed by the project.
+KETCHUMP does not claim ownership of Pokémon intellectual property or third-party assets and content referenced or displayed by the project.
 
 Third-party names, images, data, and other resources remain the property of their respective owners. Attribution or reference to a third-party source does not imply ownership, endorsement, sponsorship, affiliation, or that the material is free from copyright or other intellectual-property restrictions.
 
-Dexora is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, Creatures, PokéAPI, Pokémon Showdown, Serebii, Poképédia, or Bulbapedia.
+KETCHUMP is not affiliated with, endorsed by, or sponsored by The Pokémon Company, Nintendo, Game Freak, Creatures, PokéAPI, Pokémon Showdown, Serebii, Poképédia, or Bulbapedia.
 
-No commercial use of Pokémon intellectual property is intended. Dexora is maintained as a personal software-development portfolio project demonstrating technologies such as ASP.NET Core MVC, C#, Razor, JavaScript, responsive web development, and API integration.
+No commercial use of Pokémon intellectual property is intended. KETCHUMP is maintained as a personal software-development portfolio project demonstrating technologies such as ASP.NET Core MVC, C#, Razor, JavaScript, responsive web development, and API integration.
