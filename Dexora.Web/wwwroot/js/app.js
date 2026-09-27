@@ -1363,7 +1363,7 @@ async function pokedex(
                 <input
                     id="q"
                     value="${initial}"
-                    placeholder="Search Pokémon by name or number..."
+                    placeholder="Search Pokémon by name or number"
                 >
             </div>
 
