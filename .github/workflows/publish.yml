@@ -1,4 +1,4 @@
-name: Deploy Dexora to Production
+name: Deploy Ketchump to Production
 
 on:
   push:
@@ -19,13 +19,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore Dexora.Web/Dexora.Web.csproj
+        run: dotnet restore Ketchump.Web/Ketchump.Web.csproj
 
       - name: Build
-        run: dotnet build Dexora.Web/Dexora.Web.csproj --configuration Release --no-restore
+        run: dotnet build Ketchump.Web/Ketchump.Web.csproj --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish Dexora.Web/Dexora.Web.csproj --configuration Release --output ./publish --runtime win-x86 --self-contained false
+        run: dotnet publish Ketchump.Web/Ketchump.Web.csproj --configuration Release --output ./publish --runtime win-x86 --self-contained false
 
       - name: Deploy to MonsterASP.NET
         uses: rasmusbuchholdt/simply-web-deploy@2.1.0
