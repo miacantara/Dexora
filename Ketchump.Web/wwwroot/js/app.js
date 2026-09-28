@@ -188,17 +188,31 @@ function bindSignatureZMove(pokemon) {
             move.effect === 'dark' || move.effect === 'shadow' || move.effect === 'spectral' ? 'ghost' :
             move.effect === 'electric' ? 'electric' :
             move.effect === 'lunar' || move.effect === 'psychic' ? 'psychic' : 'dragon';
+        // Inline vector art avoids platform-specific emoji and font glyph rendering.
         const effectSymbols = {
-            electric: '⚡', surf: '🌊', boost: '✦', impact: '✹', psychic: '◉', spectral: '➶',
-            dark: '◐', wave: '〰', aura: '✧', shadow: '◒', sonic: '♫', shards: '◆', heart: '♡',
-            solar: '☼', lunar: '☾', prism: '✧'
+            electric: '<path d="M13.5 2 5 13h6l-.5 9L19 10h-6z"/>',
+            surf: '<path d="M2 14c2.5-4 5-4 7.5 0s5 4 7.5 0 5-4 7 0M2 19c2.5-4 5-4 7.5 0s5 4 7.5 0 5-4 7 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+            boost: '<path d="m12 1.8 2.7 7.1 7.5.4-5.8 4.8 1.9 7.3-6.3-4.1-6.3 4.1 1.9-7.3-5.8-4.8 7.5-.4z"/>',
+            impact: '<path d="M12 1.5 14.5 8l6.9-3.2-3.2 6.9 6.3 2.3-6.3 2.3 3.2 6.9-6.9-3.2-2.5 6.5-2.5-6.5-6.9 3.2 3.2-6.9L-.5 14l6.3-2.3-3.2-6.9L9.5 8z" transform="translate(1 0) scale(.92)"/>',
+            psychic: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M1 12h3m16 0h3" fill="none" stroke="currentColor" stroke-width="2"/>',
+            spectral: '<path d="M3 21 20 4m-8 0h8v8M4 4l5 1-4 4-1-5zm12 11 5 1-4 4-1-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+            dark: '<path d="M20.5 15A9 9 0 0 1 9 3.5 9 9 0 1 0 20.5 15Z"/>',
+            wave: '<path d="M2 15c2.5-5 5-5 7.5 0s5 5 7.5 0 5-5 7 0M4 8c2-3 4-3 6 0s4 3 6 0 4-3 6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+            aura: '<circle cx="12" cy="12" r="3"/><path d="M12 1.5v4m0 13v4M1.5 12h4m13 0h4M4.6 4.6l2.8 2.8m9.2 9.2 2.8 2.8m0-14.8-2.8 2.8m-9.2 9.2-2.8 2.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+            shadow: '<path d="M12 2a10 10 0 1 0 0 20c-3-2.5-3-6.5 0-10s3-7.5 0-10Z"/><path d="M12 2c3 2.5 3 6.5 0 10s-3 7.5 0 10" fill="none" stroke="currentColor" stroke-width="1.5"/>',
+            sonic: '<path d="M3 9v6h4l5 4V5L7 9H3Zm13-1a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+            shards: '<path d="m12 2 3 7 7-3-3 7 3 3-8 1-2 5-3-7-7-3 7-2z"/>',
+            heart: '<path d="M12 21S3 15.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+            solar: '<circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1m0-15.6-2.1 2.1M6.3 17.7l-2.1 2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+            lunar: '<path d="M20.5 15A9 9 0 0 1 9 3.5 9 9 0 1 0 20.5 15Z"/>',
+            prism: '<path d="m12 2 9 18H3L12 2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m12 2 1 18m8-18-9 18" fill="none" stroke="currentColor" stroke-width="1.5"/>'
         };
         dialog.className = 'z-move-cinematic';
         dialog.dataset.effect = move.effect;
         dialog.setAttribute('aria-labelledby', 'zMoveTitle');
         dialog.innerHTML = `
             <div class="z-move-show" style="--z-color:${COLORS[colorType]}">
-                <span class="z-move-symbol" aria-hidden="true">${effectSymbols[move.effect]}</span>
+                <span class="z-move-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false">${effectSymbols[move.effect]}</svg></span>
                 ${image ? `<img src="${image.currentSrc || image.src}" alt="${cap(displayPokemonName(pokemon.name))}" class="z-move-pokemon">` : ''}
                 <p class="z-move-kicker">SIGNATURE Z-MOVE</p>
                 <h2 id="zMoveTitle">${move.name}</h2>
