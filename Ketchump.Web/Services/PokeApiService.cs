@@ -20,22 +20,27 @@ public class PokeApiService(IHttpClientFactory factory, IMemoryCache cache)
         var listTask = Get("pokemon?limit=5000");
         var speciesTask = Get("pokemon-species?limit=1025");
         await Task.WhenAll(listTask, speciesTask);
-        var speciesList = (await speciesTask).GetProperty("results").EnumerateArray()
+        var speciesByName = (await speciesTask).GetProperty("results").EnumerateArray()
             .Select(entry => new {
                 Name = entry.GetProperty("name").GetString()!,
                 Id = int.Parse(entry.GetProperty("url").GetString()!.TrimEnd('/').Split('/').Last())
             })
-            .OrderByDescending(entry => entry.Name.Length).ToArray();
+            .ToDictionary(entry => entry.Name, StringComparer.Ordinal);
         var output = new List<object>();
         foreach (var x in (await listTask).GetProperty("results").EnumerateArray())
         {
             var name = x.GetProperty("name").GetString()!; var url = x.GetProperty("url").GetString()!;
             if (name.Split('-').Contains("totem")) continue;
             var id = int.Parse(url.TrimEnd('/').Split('/').Last());
-            // Match the longest species slug so names such as mr-mime and
-            // tauros-paldea-combat-breed retain the correct National Dex number.
-            var species = speciesList.FirstOrDefault(entry =>
-                name == entry.Name || name.StartsWith(entry.Name + "-", StringComparison.Ordinal));
+            // Trim form suffixes until the longest matching species slug is found.
+            var speciesName = name;
+            while (!speciesByName.ContainsKey(speciesName))
+            {
+                var suffix = speciesName.LastIndexOf('-');
+                if (suffix < 0) break;
+                speciesName = speciesName[..suffix];
+            }
+            speciesByName.TryGetValue(speciesName, out var species);
             if (species is null || species.Id > limit) continue;
             output.Add(new {
                 id, name, speciesName = species.Name, dexNumber = species.Id,
