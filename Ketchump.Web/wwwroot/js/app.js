@@ -1282,7 +1282,7 @@ function home() {
 
             <div class="types">
                 ${TYPES.map(type => `
-                    <button
+                    <button class="type-tag"
                         style="--c:${COLORS[type]}"
                         data-type="${type}"
                     >
@@ -1793,7 +1793,7 @@ function renderFavorites() {
 
                 <p>
                     Explore the Pokédex and tap
-                    the heart to save your favorites.
+                    the pokeball to save your favorites.
                 </p>
 
                 <button id="explorePokemon">
@@ -3242,7 +3242,7 @@ function trainersPage() {
 
                 <input
                     id="trainerQ"
-                    placeholder="Search trainer, series, region or Pokémon..."
+                    placeholder="Search trainer, series, region or Pokémon"
                 >
             </div>
 
