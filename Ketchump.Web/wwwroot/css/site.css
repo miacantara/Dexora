@@ -652,6 +652,14 @@ html[data-theme=dark] .z-move-prompt {
     animation: z-symbol-arrive .8s cubic-bezier(.14,.83,.29,1.24) both; 
 }
 
+.z-move-symbol svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+    overflow: visible;
+    fill: currentColor;
+}
+
 .z-move-pokemon { 
     z-index: 1; 
     width: clamp(130px, 30vw, 230px); 
@@ -683,8 +691,7 @@ html[data-theme=dark] .z-move-prompt {
 
 .z-move-show > p:not(.z-move-kicker) { 
     color: #ffffffc9; 
-    font-size: 14px; 
-}
+    font-size: 14px; }
 
 .z-move-cinematic[data-effect=electric] .z-move-symbol, .z-move-cinematic[data-effect=surf] .z-move-symbol { 
     animation: z-electric .9s steps(2, end) infinite; 
