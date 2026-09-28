@@ -85,71 +85,71 @@ const COLORS = {
 const SIGNATURE_Z_MOVES = [
     {
         forms: ["pikachu"],
-        name: "Catastropika", crystal: "Pikanium Z", move: "Volt Tackle"
+        name: "Catastropika", crystal: "Pikanium Z", move: "Volt Tackle", effect: "electric"
     },
     {
         forms: ["pikachu-original-cap", "pikachu-hoenn-cap", "pikachu-sinnoh-cap", "pikachu-unova-cap", "pikachu-kalos-cap", "pikachu-alola-cap", "pikachu-partner-cap"],
-        name: "10,000,000 Volt Thunderbolt", crystal: "Pikashunium Z", move: "Thunderbolt"
+        name: "10,000,000 Volt Thunderbolt", crystal: "Pikashunium Z", move: "Thunderbolt", effect: "electric"
     },
     {
         forms: ["raichu-alola"],
-        name: "Stoked Sparksurfer", crystal: "Aloraichium Z", move: "Thunderbolt"
+        name: "Stoked Sparksurfer", crystal: "Aloraichium Z", move: "Thunderbolt", effect: "surf"
     },
     {
         forms: ["eevee"],
-        name: "Extreme Evoboost", crystal: "Eevium Z", move: "Last Resort"
+        name: "Extreme Evoboost", crystal: "Eevium Z", move: "Last Resort", effect: "boost"
     },
     {
         forms: ["snorlax"],
-        name: "Pulverizing Pancake", crystal: "Snorlium Z", move: "Giga Impact"
+        name: "Pulverizing Pancake", crystal: "Snorlium Z", move: "Giga Impact", effect: "impact"
     },
     {
         forms: ["mew"],
-        name: "Genesis Supernova", crystal: "Mewnium Z", move: "Psychic"
+        name: "Genesis Supernova", crystal: "Mewnium Z", move: "Psychic", effect: "psychic"
     },
     {
         forms: ["decidueye"],
-        name: "Sinister Arrow Raid", crystal: "Decidium Z", move: "Spirit Shackle"
+        name: "Sinister Arrow Raid", crystal: "Decidium Z", move: "Spirit Shackle", effect: "spectral"
     },
     {
         forms: ["incineroar"],
-        name: "Malicious Moonsault", crystal: "Incinium Z", move: "Darkest Lariat"
+        name: "Malicious Moonsault", crystal: "Incinium Z", move: "Darkest Lariat", effect: "dark"
     },
     {
         forms: ["primarina"],
-        name: "Oceanic Operetta", crystal: "Primarium Z", move: "Sparkling Aria"
+        name: "Oceanic Operetta", crystal: "Primarium Z", move: "Sparkling Aria", effect: "wave"
     },
     {
         forms: ["tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini"],
-        name: "Guardian of Alola", crystal: "Tapunium Z", move: "Nature's Madness"
+        name: "Guardian of Alola", crystal: "Tapunium Z", move: "Nature's Madness", effect: "aura"
     },
     {
         forms: ["marshadow"],
-        name: "Soul-Stealing 7-Star Strike", crystal: "Marshadium Z", move: "Spectral Thief"
+        name: "Soul-Stealing 7-Star Strike", crystal: "Marshadium Z", move: "Spectral Thief", effect: "shadow"
     },
     {
         forms: ["kommo-o"],
-        name: "Clangorous Soulblaze", crystal: "Kommonium Z", move: "Clanging Scales"
+        name: "Clangorous Soulblaze", crystal: "Kommonium Z", move: "Clanging Scales", effect: "sonic"
     },
     {
         forms: ["lycanroc-midday", "lycanroc-midnight", "lycanroc-dusk"],
-        name: "Splintered Stormshards", crystal: "Lycanium Z", move: "Stone Edge"
+        name: "Splintered Stormshards", crystal: "Lycanium Z", move: "Stone Edge", effect: "shards"
     },
     {
         forms: ["mimikyu-disguised", "mimikyu-busted"],
-        name: "Let's Snuggle Forever", crystal: "Mimikium Z", move: "Play Rough"
+        name: "Let's Snuggle Forever", crystal: "Mimikium Z", move: "Play Rough", effect: "heart"
     },
     {
         forms: ["solgaleo", "necrozma-dusk"],
-        name: "Searing Sunraze Smash", crystal: "Solganium Z", move: "Sunsteel Strike"
+        name: "Searing Sunraze Smash", crystal: "Solganium Z", move: "Sunsteel Strike", effect: "solar"
     },
     {
         forms: ["lunala", "necrozma-dawn"],
-        name: "Menacing Moonraze Maelstrom", crystal: "Lunalium Z", move: "Moongeist Beam"
+        name: "Menacing Moonraze Maelstrom", crystal: "Lunalium Z", move: "Moongeist Beam", effect: "lunar"
     },
     {
         forms: ["necrozma-ultra"],
-        name: "Light That Burns the Sky", crystal: "Ultranecrozium Z", move: "Photon Geyser"
+        name: "Light That Burns the Sky", crystal: "Ultranecrozium Z", move: "Photon Geyser", effect: "prism"
     }
 ];
 
@@ -165,12 +165,54 @@ function renderSignatureZMove(pokemon) {
                 </svg>
                 Signature Z-Move
             </h3>
-            <div class="ability">
+            <button class="ability z-move-trigger" type="button" data-z-move="${zMove.name}"
+                data-z-effect="${zMove.effect}" aria-haspopup="dialog">
                 <b>${zMove.name}</b>
-                <p>Requires ${zMove.crystal} and ${zMove.move}.</p>
-            </div>
+                <p>Requires ${zMove.crystal} and ${zMove.move}. <span class="z-move-prompt">Tap to activate ✦</span></p>
+            </button>
         </div>
     `;
+}
+
+function bindSignatureZMove(pokemon) {
+    const trigger = app.querySelector('[data-z-move]');
+    if (!trigger) return;
+    trigger.addEventListener('click', () => {
+        const dialog = document.createElement('dialog');
+        const image = app.querySelector('.profile-clean-animation');
+        const move = SIGNATURE_Z_MOVES.find(entry => entry.name === trigger.dataset.zMove);
+        if (!move) return;
+        const colorType = move.effect === 'wave' || move.effect === 'surf' ? 'water' :
+            move.effect === 'solar' || move.effect === 'impact' || move.effect === 'shards' ? 'fire' :
+            move.effect === 'heart' || move.effect === 'aura' || move.effect === 'boost' ? 'fairy' :
+            move.effect === 'dark' || move.effect === 'shadow' || move.effect === 'spectral' ? 'ghost' :
+            move.effect === 'electric' ? 'electric' :
+            move.effect === 'lunar' || move.effect === 'psychic' ? 'psychic' : 'dragon';
+        const effectSymbols = {
+            electric: '⚡', surf: '🌊', boost: '✦', impact: '✹', psychic: '◉', spectral: '➶',
+            dark: '◐', wave: '〰', aura: '✧', shadow: '◒', sonic: '♫', shards: '◆', heart: '♡',
+            solar: '☼', lunar: '☾', prism: '✧'
+        };
+        dialog.className = 'z-move-cinematic';
+        dialog.dataset.effect = move.effect;
+        dialog.setAttribute('aria-labelledby', 'zMoveTitle');
+        dialog.innerHTML = `
+            <div class="z-move-show" style="--z-color:${COLORS[colorType]}">
+                <span class="z-move-symbol" aria-hidden="true">${effectSymbols[move.effect]}</span>
+                ${image ? `<img src="${image.currentSrc || image.src}" alt="${cap(displayPokemonName(pokemon.name))}" class="z-move-pokemon">` : ''}
+                <p class="z-move-kicker">SIGNATURE Z-MOVE</p>
+                <h2 id="zMoveTitle">${move.name}</h2>
+                <p>Requires ${move.crystal} and ${move.move}</p>
+                <button class="z-move-close" type="button">Close</button>
+            </div>`;
+        const close = () => { if (dialog.open) dialog.close(); };
+        dialog.querySelector('.z-move-close').addEventListener('click', close);
+        dialog.addEventListener('click', event => { if (event.target === dialog) close(); });
+        dialog.addEventListener('close', () => { trigger.disabled = false; dialog.remove(); }, { once: true });
+        document.body.append(dialog);
+        trigger.disabled = true;
+        dialog.showModal();
+    });
 }
 
 const GENERATION_NAMES = {
@@ -201,6 +243,7 @@ const app = document.querySelector('#app');
 
 let list = [];
 let enriched = new Map();
+const pokeCardTypeRequests = new Map();
 let current = 'home';
 let pokemonFoodDataPromise;
 let shinyAudioContext;
@@ -301,19 +344,35 @@ const MEANINGFUL_FORM_SUFFIXES = {
     sawsbuck: ['summer', 'autumn', 'winter'], darmanitan: ['galar-standard']
 };
 
+const IN_GAME_FORM_LABELS = {
+    burmy: { 'burmy-plant': 'Plant Cloak', 'burmy-sandy': 'Sandy Cloak', 'burmy-trash': 'Trash Cloak' },
+    deoxys: { 'deoxys-normal': 'Normal Forme', 'deoxys-attack': 'Attack Forme', 'deoxys-defense': 'Defense Forme', 'deoxys-speed': 'Speed Forme' },
+    wormadam: { 'wormadam-plant': 'Plant Cloak', 'wormadam-sandy': 'Sandy Cloak', 'wormadam-trash': 'Trash Cloak' },
+    cherrim: { 'cherrim-overcast': 'Overcast Form', 'cherrim-sunshine': 'Sunshine Form' },
+    rotom: { rotom: 'Normal Form', 'rotom-heat': 'Heat Rotom', 'rotom-wash': 'Wash Rotom', 'rotom-frost': 'Frost Rotom', 'rotom-fan': 'Fan Rotom', 'rotom-mow': 'Mow Rotom' },
+    giratina: { 'giratina-altered': 'Altered Forme', 'giratina-origin': 'Origin Forme' },
+    shaymin: { 'shaymin-land': 'Land Forme', 'shaymin-sky': 'Sky Forme' },
+    aegislash: { 'aegislash-shield': 'Shield Forme', 'aegislash-blade': 'Blade Forme' },
+    zygarde: { 'zygarde-10': '10% Forme', 'zygarde-50': '50% Forme', 'zygarde-10-power-construct': '10% Forme', 'zygarde-50-power-construct': '50% Forme', 'zygarde-complete': 'Complete Forme' },
+    meloetta: { 'meloetta-aria': 'Aria Forme', 'meloetta-pirouette': 'Pirouette Forme' }
+};
+
 function isMeaningfulPokemonForm(name, speciesName) {
+    if (IN_GAME_FORM_LABELS[speciesName]?.[name]) return true;
     if (name?.split('-').includes('totem')) return false;
     if (!name || !speciesName || name === speciesName || /-gmax$/.test(name)) return false;
     if (/^pikachu-.*-cap$/.test(name) || [
         'greninja-ash', 'greninja-battle-bond', 'pikachu-belle', 'pikachu-cosplay',
         'pikachu-libre', 'pikachu-phd', 'pikachu-pop-star', 'pikachu-rock-star', 'zarude-dada'
     ].includes(name)) return false;
+    if (name.startsWith(`${speciesName}-mega`) && /-mega(?:-[a-z]+)?$/.test(name)) return true;
     if (/-(alola|galar|hisui|paldea)$/.test(name)) return true;
     if (/^arceus-(normal|fire|water|electric|grass|ice|fighting|poison|ground|flying|psychic|bug|rock|ghost|dragon|dark|steel|fairy)$/.test(name)) return true;
     return (MEANINGFUL_FORM_SUFFIXES[speciesName] || []).some(suffix => name === `${speciesName}-${suffix}`);
 }
 
 function meaningfulFormLabel(name, speciesName) {
+    if (IN_GAME_FORM_LABELS[speciesName]?.[name]) return IN_GAME_FORM_LABELS[speciesName][name];
     const regions = {
         alola: 'Alolan Form', galar: 'Galarian Form',
         hisui: 'Hisuian Form', paldea: 'Paldean Form'
@@ -444,8 +503,17 @@ const badge = (type) => {
     `;
 };
 
+const typeImageBadge = (type) => `
+    <img
+        class="type-image-badge"
+        src="/images/types/${encodeURIComponent(type.toLowerCase())}.${type.toLowerCase() === 'grass' ? 'svg' : 'png'}"
+        alt="${cap(type)}"
+        title="${cap(type)}"
+        loading="lazy">
+`;
+
 function itemIcon(name) {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${name}.png`;
+    return `/images/items/${name}.png`;
 }
 
 
@@ -810,10 +878,11 @@ async function init() {
 
     const start =
         location.hash.replace('#', '') ||
+        location.pathname.replace(/^\/+|\/+$/g, '') ||
         'home';
 
     if (start === 'favorites') {
-        renderFavorites();
+        navigate('favorites', true);
         loadListInBackground();
         return;
     }
@@ -827,13 +896,15 @@ async function init() {
             'home',
             'pokedex',
             'types',
-            'trainers'
+            'trainers',
+            'whos-that-pokemon'
         ];
 
         navigate(
             validPages.includes(start)
                 ? start
-                : 'home'
+                : 'home',
+            true
         );
     } catch (error) {
         console.error(
@@ -1045,14 +1116,20 @@ function activeNav() {
     updateFavCount();
 }
 
-function navigate(page) {
+function navigate(page, replace = false) {
+    if (current === 'whos-that-pokemon' && page !== current) {
+        whosThatPokemonCry?.pause();
+        whosThatPokemonCry = null;
+        whosThatPokemonFactRequest++;
+    }
     current = page;
 
-    if (location.hash !== `#${page}`) {
-        history.replaceState(
+    const path = page === 'home' ? '/' : `/${page}`;
+    if (location.pathname !== path || location.hash) {
+        history[replace ? 'replaceState' : 'pushState'](
             null,
             '',
-            `#${page}`
+            path + location.search
         );
     }
 
@@ -1077,24 +1154,29 @@ function navigate(page) {
     if (page === 'trainers') {
         return trainersPage();
     }
+
+    if (page === 'whos-that-pokemon') {
+        return whosThatPokemonPage();
+    }
 }
 
 window.addEventListener(
-    'hashchange',
+    'popstate',
     () => {
         const page =
-            location.hash.replace('#', '');
+            location.pathname.replace(/^\/+|\/+$/g, '') || 'home';
 
         const validPages = [
             'home',
             'pokedex',
             'types',
             'favorites',
-            'trainers'
+            'trainers',
+            'whos-that-pokemon'
         ];
 
         if (validPages.includes(page)) {
-            navigate(page);
+            navigate(page, true);
         }
     }
 );
@@ -1110,8 +1192,7 @@ function card(pokemon, types = []) {
     }
 
     const image =
-        pokemon.image ||
-        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
+        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`;
 
     const isFavorite = favs.includes(Number(pokemon.id));
     const displayName = displayPokemonName(pokemon.name);
@@ -1134,10 +1215,6 @@ function card(pokemon, types = []) {
                 <span class="pokeball-icon"></span>
             </button>
 
-            <small>
-                #${String(pokemon.dexNumber || pokemon.id).padStart(4, '0')}
-            </small>
-
             <img
                 loading="lazy"
                 src="${image}"
@@ -1145,8 +1222,8 @@ function card(pokemon, types = []) {
 
             <h3>${cap(displayName)}</h3>
 
-            <div>
-                ${types.map(badge).join('')}
+            <div class="poke-card-type-badges" data-card-types="${pokemon.id}" aria-label="Pokémon types">
+                ${types.map(typeImageBadge).join('')}
             </div>
         </article>
     `;
@@ -1217,6 +1294,46 @@ function bindCards() {
                 }
             };
         });
+
+    hydratePokeCardTypeBadges();
+}
+
+function hydratePokeCardTypeBadges() {
+    const containers = [...app.querySelectorAll('.poke-card-type-badges[data-card-types]')]
+        .filter(container => !container.childElementCount && !container.dataset.typeLoadStarted);
+    if (!containers.length) return;
+
+    const loadTypes = async container => {
+        const id = Number(container.dataset.cardTypes);
+        if (!Number.isInteger(id)) return;
+        container.dataset.typeLoadStarted = 'true';
+        try {
+            if (!pokeCardTypeRequests.has(id)) {
+                pokeCardTypeRequests.set(id, json(`/api/pokemon/types/${id}`));
+            }
+            const types = await pokeCardTypeRequests.get(id);
+            if (!container.isConnected) return;
+            container.innerHTML = types.map(typeImageBadge).join('');
+            container.setAttribute('aria-label', `Types: ${types.map(cap).join(', ')}`);
+        } catch {
+            pokeCardTypeRequests.delete(id);
+            if (container.isConnected) container.dataset.typeLoadStarted = 'false';
+        }
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        containers.slice(0, 24).forEach(loadTypes);
+        return;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            observer.unobserve(entry.target);
+            loadTypes(entry.target);
+        });
+    }, { rootMargin: '250px 0px' });
+    containers.forEach(container => observer.observe(container));
 }
 
 
@@ -1269,7 +1386,9 @@ function home() {
 
             <img
                 id="heroPokemon"
-                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${lastViewedPokemon.id}.png"
+                role="button"
+                tabindex="0"
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${lastViewedPokemon.id}.png"
                 alt=""
             >
         </section>
@@ -1317,7 +1436,14 @@ function home() {
 
     const heroPokemon = document.querySelector('#heroPokemon');
     const hero = heroPokemon.closest('.hero');
-    const heroPokemonId = lastViewedPokemon.id;
+    let heroPokemonId = lastViewedPokemon.id;
+    heroPokemon.addEventListener('click', () => showDetail(heroPokemonId));
+    heroPokemon.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            showDetail(heroPokemonId);
+        }
+    });
     let artworkFailed = false;
     const setHeroColor = color => {
         hero.style.setProperty('--hero-color', POKEMON_BODY_COLORS[color] || '#94A3B8');
@@ -1335,8 +1461,9 @@ function home() {
     heroPokemon.alt = cap(displayPokemonName(lastViewedPokemon.name));
     heroPokemon.addEventListener('error', () => {
         artworkFailed = true;
+        heroPokemonId = 25;
         setHeroColor('yellow');
-        heroPokemon.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png';
+        heroPokemon.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png';
         heroPokemon.alt = 'Pikachu';
     }, { once: true });
 
@@ -1629,7 +1756,7 @@ function typesPage() {
                     data-type="${type}"
                     style="--type-color:${COLORS[type]}"
                 >
-                    <img class="type-pokemon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${representatives[type].id}.png" alt="${representatives[type].name ? cap(displayPokemonName(representatives[type].name)) : cap(type) + ' Pokémon'}" width="120" height="120" loading="lazy">
+                    <img class="type-pokemon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${representatives[type].id}.png" alt="${representatives[type].name ? cap(displayPokemonName(representatives[type].name)) : cap(type) + ' Pokémon'}" width="120" height="120" loading="lazy">
                     <h3>${cap(type)}</h3>
                 </article>
             `).join('')}
@@ -1686,7 +1813,10 @@ async function showType(name) {
             class="back"
             onclick="navigate('types')"
         >
-            ‹ Back to Types
+            <svg class="back-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m15 18-6-6 6-6" />
+            </svg>
+            Back to Types
         </button>
 
         <section
@@ -1705,7 +1835,11 @@ async function showType(name) {
             </div>
             ${featuredPokemon ? `
                 <img
-                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${featuredPokemon.id}.png"
+                    data-featured-pokemon="${featuredPokemon.id}"
+                    role="button"
+                    tabindex="0"
+                    aria-label="View ${cap(displayPokemonName(featuredPokemon.name))} details"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${featuredPokemon.id}.png"
                     alt="${cap(displayPokemonName(featuredPokemon.name))}"
                     loading="eager"
                 >
@@ -1762,6 +1896,17 @@ async function showType(name) {
     `;
 
     bindCards();
+    const featuredImage = app.querySelector('[data-featured-pokemon]');
+    if (featuredImage) {
+        const openFeaturedPokemon = () => showDetail(featuredImage.dataset.featuredPokemon);
+        featuredImage.addEventListener('click', openFeaturedPokemon);
+        featuredImage.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openFeaturedPokemon();
+            }
+        });
+    }
 }
 
 
@@ -1823,7 +1968,7 @@ function renderFavorites() {
             id: Number(id),
             name: `Pokémon #${id}`,
             image:
-                `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+                `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`
         };
     });
 
@@ -1850,6 +1995,46 @@ function renderFavorites() {
 /* =========================================================
    PROFILE MEDIA
    ========================================================= */
+
+const artworkBoundsCache = new Map();
+
+function getArtworkBounds(url) {
+    if (!artworkBoundsCache.has(url)) {
+        artworkBoundsCache.set(url, new Promise(resolve => {
+            const image = new Image();
+            image.crossOrigin = 'anonymous';
+            image.onerror = () => resolve(null);
+            image.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = image.naturalWidth;
+                    canvas.height = image.naturalHeight;
+                    const context = canvas.getContext('2d', { willReadFrequently: true });
+                    context.drawImage(image, 0, 0);
+                    const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+                    let left = canvas.width, top = canvas.height, right = -1, bottom = -1;
+                    for (let y = 0; y < canvas.height; y++) {
+                        for (let x = 0; x < canvas.width; x++) {
+                            if (pixels[(y * canvas.width + x) * 4 + 3] < 16) continue;
+                            left = Math.min(left, x);
+                            right = Math.max(right, x);
+                            top = Math.min(top, y);
+                            bottom = Math.max(bottom, y);
+                        }
+                    }
+                    resolve(right < left ? null : {
+                        width: canvas.width, height: canvas.height,
+                        left, top, artWidth: right - left + 1, artHeight: bottom - top + 1
+                    });
+                } catch {
+                    resolve(null);
+                }
+            };
+            image.src = url;
+        }));
+    }
+    return artworkBoundsCache.get(url);
+}
 
 function setupProfileMedia() {
     const wrapper =
@@ -1946,7 +2131,7 @@ function setupProfileMedia() {
    POKÉMON DETAILS
    ========================================================= */
 
-async function showDetail(id) {
+async function showDetail(id, selectedAppearance = '') {
     app.innerHTML = `
         <div class="loading">
             Loading Pokémon…
@@ -2100,22 +2285,44 @@ async function showDetail(id) {
     }
 
     const alternateForms = (species.varieties || [])
-        .filter(variant => !variant.is_default &&
+        .filter(variant => variant.is_default ||
             isMeaningfulPokemonForm(variant.pokemon?.name, species.name))
         .map(variant => ({
             id: Number(variant.pokemon.url.match(/\/(\d+)\/$/)?.[1]),
             name: variant.pokemon.name,
-            label: meaningfulFormLabel(variant.pokemon.name, species.name)
+            label: meaningfulFormLabel(variant.pokemon.name, species.name) || 'Normal Form'
         }))
         .filter(form => Number.isFinite(form.id))
         .filter((form, index, forms) =>
-            forms.findIndex(candidate => candidate.name === form.name) === index);
-    const currentFormLabel = pokemonFormLabel(pokemon.name, species.name);
+            forms.findIndex(candidate => candidate.label === form.label) === index);
+    let appearanceName = pokemon.name;
+    const hasAppearanceForms = ['burmy', 'cherrim'].includes(species.name);
+    if (hasAppearanceForms) {
+        const formLabels = IN_GAME_FORM_LABELS[species.name];
+        appearanceName = Object.hasOwn(formLabels, selectedAppearance) ? selectedAppearance : Object.keys(formLabels)[0];
+        alternateForms.splice(0, alternateForms.length, ...Object.entries(formLabels).map(([name, label]) => ({
+            id: pokemon.id, name, label,
+            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${species.id}-${name.split('-')[1]}.png`
+        })));
+    }
+    const currentFormLabel = IN_GAME_FORM_LABELS[species.name]?.[appearanceName] || pokemonFormLabel(pokemon.name, species.name);
 
-    const officialArtwork = pokemon.sprites?.other?.['official-artwork'];
-    const artwork = officialArtwork?.front_default || pokemon.sprites?.front_default;
-    const shinyArtwork = officialArtwork?.front_shiny || pokemon.sprites?.front_shiny;
+    const homeArtwork = pokemon.sprites?.other?.home;
+    let artwork = hasAppearanceForms
+        ? alternateForms.find(form => form.name === appearanceName).image
+        : homeArtwork?.front_default || pokemon.sprites?.front_default;
+    let shinyArtwork = hasAppearanceForms
+        ? artwork.replace('/home/', '/home/shiny/')
+        : homeArtwork?.front_shiny;
 
+    const genderArtwork = !hasAppearanceForms && homeArtwork?.front_female && homeArtwork?.front_default
+        ? {
+            male: { normal: artwork, shiny: shinyArtwork },
+            female: {
+                normal: homeArtwork.front_female,
+                shiny: homeArtwork.front_shiny_female
+            }
+        } : null;
     const animatedSprite = artwork;
     const cryUrl = pokemon.cries?.latest ||
         `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemon.id}.ogg`;
@@ -2125,10 +2332,13 @@ async function showDetail(id) {
             class="back"
             onclick="navigate('pokedex')"
         >
-            ‹ Back to Pokédex
+            <svg class="back-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m15 18-6-6 6-6" />
+            </svg>
+            Back to Pokédex
         </button>
 
-        <section class="profile pokemon-profile" style="--accent:${COLORS[types[0]]}">
+        <section class="profile pokemon-profile ${genderArtwork ? 'has-gender-toggle' : ''}" style="--accent:${COLORS[types[0]]}">
 
              <button class="fact-cry" type="button" data-pokemon-cry="${cryUrl}" aria-label="Play ${cap(displayPokemonName(pokemon.name))}'s sound">
 
@@ -2264,6 +2474,12 @@ async function showDetail(id) {
                 <span class="pokeball-icon"></span>
             </button>
 
+            ${genderArtwork ? `
+                <div class="gender-toggle" role="group" aria-label="Pokémon gender">
+                    <button type="button" data-gender="male" aria-label="Show male" title="Male" aria-pressed="true">♂</button>
+                    <button type="button" data-gender="female" aria-label="Show female" title="Female" aria-pressed="false">♀</button>
+                </div>
+            ` : ''}
             <button class="shiny-toggle" type="button" data-shiny-toggle
                     aria-label="${shinyArtwork ? 'Show shiny' : 'Shiny unavailable'}"
                     title="${shinyArtwork ? 'Show shiny' : 'Shiny unavailable'}"
@@ -2392,7 +2608,7 @@ async function showDetail(id) {
                                 data-evo="${evolution.id}"
                             >
                                 <img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evolution.id}.png"
+                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${evolution.id}.png"
                                     alt="${cap(evolution.name)}"
                                 >
 
@@ -2418,16 +2634,16 @@ async function showDetail(id) {
                 </div>
             </section>
 
-            ${alternateForms.length ? `
+            ${alternateForms.length > 1 ? `
                 <section class="panel wide alternate-forms-section">
                     <h2>Alternate Forms</h2>
-                    <p class="panel-note">Choose a form to view its artwork and details.</p>
+                    ${species.name === 'wormadam' ? `<p class="panel-note">Wormadam’s cloak is fixed when Burmy evolves.</p>` : ''}
                     <div class="alternate-form-grid" role="group" aria-label="${englishSpeciesName} forms">
                         ${alternateForms.map(form => `
-                            <button class="alternate-form-card" type="button" data-form-id="${form.id}"
-                                aria-pressed="${form.name === pokemon.name}"
+                            <button class="alternate-form-card" type="button" data-form-id="${form.id}" data-form-name="${form.name}"
+                                aria-pressed="${form.label === currentFormLabel || form.name === appearanceName}"
                                 aria-label="Show ${englishSpeciesName} — ${form.label}">
-                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${form.id}.png"
+                                <img src="${form.image || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${form.id}.png`}"
                                     onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${form.id}.png'"
                                     alt="" loading="lazy" width="112" height="112">
                                 <span>${form.label}</span>
@@ -2481,9 +2697,12 @@ async function showDetail(id) {
     setupCarousels();
     rememberViewedPokemon(pokemon, species);
     setupProfileMedia();
-
+    bindSignatureZMove(pokemon);
     app.querySelectorAll('[data-form-id]').forEach(formButton => {
-        formButton.addEventListener('click', () => showDetail(Number(formButton.dataset.formId)));
+        formButton.addEventListener('click', async () => {
+            await showDetail(Number(formButton.dataset.formId), formButton.dataset.formName);
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        });
     });
 
     const shinyButton = app.querySelector('[data-shiny-toggle]');
@@ -2492,7 +2711,47 @@ async function showDetail(id) {
     const backdrop = profileMedia.querySelector('.profile-hd-backdrop');
     const profileVideo = profileMedia.querySelector('video');
     let showingShiny = false;
+    let selectedGender = 'male';
+    let changingGender = false;
     let shinySoundPending = false;
+    let artworkBounds;
+    const alignShinyArtwork = () => {
+        profileImage.style.transform = '';
+        if (!showingShiny || !artworkBounds?.every(Boolean)) return;
+        const [normal, shiny] = artworkBounds.map(bounds => {
+            const fit = Math.min(profileImage.clientWidth / bounds.width, profileImage.clientHeight / bounds.height);
+            return {
+                width: bounds.artWidth * fit, height: bounds.artHeight * fit,
+                x: (bounds.left + bounds.artWidth / 2 - bounds.width / 2) * fit,
+                y: (bounds.top + bounds.artHeight / 2 - bounds.height / 2) * fit
+            };
+        });
+        if (!shiny.width || !shiny.height) return;
+        const scale = Math.max(normal.width, normal.height) / Math.max(shiny.width, shiny.height);
+        profileImage.style.transform = `translate(${normal.x - shiny.x * scale}px, ${normal.y - shiny.y * scale}px) scale(${scale})`;
+    };
+    const artworkResizeObserver = new ResizeObserver(() => {
+        if (!profileImage.isConnected) {
+            artworkResizeObserver.disconnect();
+            return;
+        }
+        alignShinyArtwork();
+    });
+    artworkResizeObserver.observe(profileImage);
+    // Decode both official images and measure their padding before any swap.
+    // This avoids showing an unaligned frame while the shiny image loads.
+    const prepareArtwork = () => shinyArtwork ? Promise.all([
+        Promise.all([getArtworkBounds(artwork), getArtworkBounds(shinyArtwork)]),
+        ...[artwork, shinyArtwork].map(src => {
+            const image = new Image();
+            image.src = src;
+            return image.decode();
+        })
+    ]).then(([bounds]) => {
+        artworkBounds = bounds;
+        return true;
+    }).catch(() => false) : Promise.resolve(false);
+    let artworkReady = prepareArtwork();
 
     const playLoadedShinySound = () => {
         if (!shinySoundPending || !showingShiny || !profileImage.isConnected ||
@@ -2509,20 +2768,34 @@ async function showDetail(id) {
         const image = showingShiny ? shinyArtwork : artwork;
         profileImage.src = image;
         backdrop.src = image;
-        profileImage.alt = `${showingShiny ? 'Shiny ' : ''}${cap(displayPokemonName(pokemon.name))}`;
+        alignShinyArtwork();
+        profileImage.alt = `${showingShiny ? 'Shiny ' : ''}${genderArtwork ? `${cap(selectedGender)} ` : ''}${cap(displayPokemonName(pokemon.name))}`;
         profileMedia.classList.toggle('is-shiny', showingShiny);
+        profileMedia.classList.toggle('has-gender-artwork', Boolean(genderArtwork));
         shinyButton.setAttribute('aria-pressed', String(showingShiny));
         shinyButton.title = showingShiny ? 'Show normal' : 'Show shiny';
         shinyButton.setAttribute('aria-label', shinyButton.title);
-        if (showingShiny) {
+        if (showingShiny || genderArtwork) {
             profileVideo?.pause();
         } else if (profileVideo?.classList.contains('is-ready')) {
             profileVideo.play().catch(() => { });
         }
     };
 
-    shinyButton.addEventListener('click', () => {
-        if (!shinyArtwork || shinyButton.disabled) return;
+    shinyButton.addEventListener('click', async () => {
+        if (!shinyArtwork || shinyButton.disabled || changingGender) return;
+        shinyButton.disabled = true;
+        shinyButton.setAttribute('aria-busy', 'true');
+        const ready = await artworkReady;
+        shinyButton.removeAttribute('aria-busy');
+        if (!profileImage.isConnected) return;
+        if (!ready) {
+            shinyButton.title = 'Shiny unavailable';
+            shinyButton.setAttribute('aria-label', shinyButton.title);
+            app.querySelector('[data-shiny-status]').textContent = 'The shiny image could not be loaded.';
+            return;
+        }
+        shinyButton.disabled = false;
         showingShiny = !showingShiny;
         shinySoundPending = showingShiny;
         if (showingShiny) prepareShinySound()?.then(playLoadedShinySound);
@@ -2540,6 +2813,39 @@ async function showDetail(id) {
         shinyButton.setAttribute('aria-label', shinyButton.title);
         app.querySelector('[data-shiny-status]').textContent = 'The shiny image could not be loaded.';
     });
+
+    const genderButtons = [...app.querySelectorAll('[data-gender]')];
+    genderButtons.forEach(button => button.addEventListener('click', async () => {
+        const gender = button.dataset.gender;
+        if (changingGender || shinyButton.getAttribute('aria-busy') === 'true' || gender === selectedGender) return;
+        changingGender = true;
+        genderButtons.forEach(item => { item.disabled = true; });
+        const next = genderArtwork[gender];
+        const target = showingShiny ? next.shiny : next.normal;
+        try {
+            if (!target) throw new Error('Artwork unavailable');
+            const preload = new Image();
+            preload.src = target;
+            await preload.decode();
+            const bounds = await Promise.all([getArtworkBounds(next.normal), next.shiny ? getArtworkBounds(next.shiny) : null]);
+            if (!profileImage.isConnected) return;
+            artwork = next.normal;
+            shinyArtwork = next.shiny;
+            artworkBounds = bounds;
+            selectedGender = gender;
+            artworkReady = prepareArtwork();
+            shinyButton.disabled = !shinyArtwork;
+            updateAppearance();
+            genderButtons.forEach(item => item.setAttribute('aria-pressed', String(item.dataset.gender === gender)));
+            app.querySelector('[data-shiny-status]').textContent = '';
+        } catch {
+            if (profileImage.isConnected) app.querySelector('[data-shiny-status]').textContent = 'This gender’s artwork could not be loaded.';
+        } finally {
+            changingGender = false;
+            genderButtons.forEach(item => { item.disabled = false; });
+        }
+    }));
+    if (genderArtwork) updateAppearance();
 
     const cryButton = app.querySelector('[data-pokemon-cry]');
     if (cryButton) {
@@ -3200,6 +3506,289 @@ const TRAINERS = [
 
 const TRAINER_SERIES_OPTIONS = [...new Set(TRAINERS.map(trainer => trainer.series))];
 
+const TRAINER_BIOS = {
+    'Misty': 'Misty is the Water-type specialist of Cerulean Gym and one of Ash’s first traveling companions. Spirited and determined, she dreams of becoming a great Water Pokémon Trainer.',
+    'Brock': 'Brock is a former Pewter Gym Leader and a longtime companion of Ash. His skill at caring for Pokémon leads him from Pokémon breeding toward becoming a Pokémon Doctor.',
+    'May': 'May travels through Hoenn with Ash and discovers a love of Pokémon Contests. As a Coordinator, she develops performances that show off her partners’ talents.',
+    'Dawn': 'Dawn is a Pokémon Coordinator from Twinleaf Town in Sinnoh. Traveling with Ash and Brock, she works toward following her mother’s success in Pokémon Contests.',
+    'Tracey': 'Tracey is a Pokémon watcher who travels with Ash in the Orange Islands. He enjoys observing and sketching Pokémon and later assists Professor Oak.',
+    'Tracey Sketchit': 'Tracey is a Pokémon watcher who travels with Ash in the Orange Islands. He enjoys observing and sketching Pokémon and later assists Professor Oak.',
+    'Cilan': 'Cilan is a Striaton Gym Leader and Pokémon Connoisseur who accompanies Ash through Unova. He studies the connection between Trainers and their Pokémon.',
+    'Iris': 'Iris is a Dragon-type specialist from Unova. In the anime, she travels with Ash while pursuing her dream of becoming a Dragon Master; in Black 2 and White 2, she is Unova’s Champion.',
+    'Serena': 'Serena travels with Ash through Kalos and finds her calling as a Pokémon Performer. She builds confidence alongside her partners through Pokémon Showcases.',
+    'Clemont': 'Clemont is Lumiose City’s Electric-type Gym Leader and an enthusiastic inventor. He travels through Kalos with Ash and his younger sister, Bonnie.',
+    'Bonnie': 'Bonnie is Clemont’s younger sister and a member of Ash’s Kalos traveling group. She cares for Dedenne and forms close friendships with the Pokémon she meets.',
+    'Lillie': 'Lillie is one of Ash’s classmates at the Pokémon School in Alola. Her story follows her growing confidence and her efforts to overcome a fear of touching Pokémon.',
+    'Kiawe': 'Kiawe is an Alolan Trainer and one of Ash’s Pokémon School classmates. He specializes in Fire-type Pokémon and takes great pride in battling with Z-Moves.',
+    'Lana': 'Lana is one of Ash’s classmates in Alola and has a particular love of Water-type Pokémon. She enjoys fishing and adventures with her partner Popplio.',
+    'Mallow': 'Mallow is an Alolan Pokémon School student and a friend of Ash. An enthusiastic cook, she helps at her family’s restaurant and partners with Grass-type Pokémon.',
+    'Sophocles': 'Sophocles is a technology enthusiast and one of Ash’s classmates in Alola. He enjoys inventing and shares a strong bond with his Electric-type partners.',
+    'Goh': 'Goh is Ash’s research partner in Pokémon Journeys. Curious about Pokémon of every kind, he sets out to catch them all, with the Mythical Pokémon Mew as his ultimate goal.',
+    'Chloe': 'Chloe is Professor Cerise’s daughter and a childhood friend of Goh. Through her adventures with Eevee, she explores what her own future with Pokémon might be.',
+    'Jessie': 'Jessie is a member of Team Rocket who travels with James and Meowth. Alongside their schemes to capture Pikachu, she pursues her love of performing in Pokémon Contests and Showcases.',
+    'James': 'James is a member of Team Rocket and Jessie and Meowth’s partner. Though often involved in their elaborate schemes, he is also known for his affection for his own Pokémon.',
+    'Blue': 'Blue is Professor Oak’s grandson and Red’s rival in the original games. He reaches the position of Pokémon League Champion and later becomes the Viridian City Gym Leader.',
+    'Lance': 'Lance is a Dragon-type specialist who appears as an Elite Four member in Kanto and as Champion in the Johto games. Dragonite is one of his best-known partners.',
+    'Steven Stone': 'Steven Stone is a Hoenn Champion known for his Steel-type Pokémon and his interest in rare stones. His signature partner is Metagross.',
+    'Wallace': 'Wallace is Hoenn’s elegant Water-type specialist. He serves as Sootopolis Gym Leader in Ruby and Sapphire and as Champion in Emerald.',
+    'Cynthia': 'Cynthia is the Sinnoh League Champion and a researcher of Pokémon myths and history. Her varied team is especially associated with her powerful Garchomp.',
+    'Alder': 'Alder is the Unova Champion in Pokémon Black and White. A traveling mentor, he encourages Trainers to consider what matters beyond simply winning battles.',
+    'Diantha': 'Diantha is both a celebrated actress and the Kalos League Champion. Her signature partner, Gardevoir, can Mega Evolve.',
+    'Professor Kukui': 'Professor Kukui is Alola’s Pokémon Professor and studies Pokémon moves. He helps establish the region’s Pokémon League and also battles as the Masked Royal.',
+    'Leon': 'Leon is Galar’s Champion in Pokémon Sword and Shield, famous for his spectacular battles. His signature partner is Charizard, and he is Hop’s older brother.',
+    'Geeta': 'Geeta is the chairwoman of Paldea’s Pokémon League and holds the title of Top Champion. She oversees the League and tests Trainers during the Champion Assessment.',
+    'Ash Ketchum': 'Ash is a Trainer from Pallet Town who travels the Pokémon world with Pikachu. His adventures center on learning from other Trainers and building lasting bonds with Pokémon.',
+    'Liko': 'Liko is a young Trainer from Paldea and a protagonist of Pokémon Horizons. Alongside her partner Sprigatito, she joins the Rising Volt Tacklers and discovers a wider world of Pokémon.',
+    'Roy': 'Roy is a protagonist of Pokémon Horizons who sets off on an adventure with Fuecoco. Traveling with the Rising Volt Tacklers, he grows as a Trainer alongside Liko and Dot.',
+    'Dot': 'Dot is a member of the Rising Volt Tacklers in Pokémon Horizons and partners with Quaxly. She is also the creator behind the online personality Nidothing.'
+};
+
+function showTrainerProfile(trainer) {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'trainer-profile';
+    dialog.setAttribute('aria-labelledby', 'trainerProfileName');
+    dialog.innerHTML = `
+        <form method="dialog"><button class="trainer-profile-close" aria-label="Close profile"><span aria-hidden="true">&times;</span></button></form>
+        <div class="trainer-head">
+            <div class="trainer-portrait">
+                <span aria-hidden="true">${trainer.name.split(' ').map(part => part[0]).join('')}</span>
+                <img src="/images/trainers/${trainer.portrait || TRAINER_PORTRAITS[trainer.name]}.png"
+                    alt="${trainer.name}" onerror="this.hidden = true">
+            </div>
+            <div><h2 id="trainerProfileName">${trainer.name}</h2>
+                <b class="trainer-title">${trainer.title}</b></div>
+        </div>
+        <p>${TRAINER_BIOS[trainer.name] || `${trainer.name} is a ${trainer.title} featured in ${trainer.series}.`}</p>
+        <dl>
+            <dt>Region</dt><dd>${trainer.region}</dd>
+            <dt>Appears in</dt><dd>${trainer.series}</dd>
+        </dl>
+    `;
+    dialog.addEventListener('close', () => dialog.remove(), { once: true });
+    dialog.addEventListener('click', event => {
+        if (event.target !== dialog) return;
+        const bounds = dialog.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right ||
+            event.clientY < bounds.top || event.clientY > bounds.bottom) {
+            dialog.close();
+        }
+    });
+    document.body.append(dialog);
+    dialog.showModal();
+}
+
+let whosThatPokemonSeen = new Set();
+let whosThatPokemonScore = 0;
+let whosThatPokemonRound = 0;
+let whosThatPokemonFactRequest = 0;
+let whosThatPokemonCry;
+
+function playWhosThatPokemonCry(pokemon) {
+    whosThatPokemonCry?.pause();
+    whosThatPokemonCry = new Audio(
+        `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemon.id}.ogg`
+    );
+    const audio = whosThatPokemonCry;
+    audio.addEventListener('ended', () => {
+        if (whosThatPokemonCry === audio) whosThatPokemonCry = null;
+    }, { once: true });
+    audio.play().catch(() => {
+        if (whosThatPokemonCry === audio) whosThatPokemonCry = null;
+    });
+}
+
+function whosThatPokemonPage() {
+    current = 'whos-that-pokemon';
+    whosThatPokemonSeen = new Set();
+    whosThatPokemonScore = 0;
+    whosThatPokemonRound = 0;
+    whosThatPokemonFactRequest++;
+    activeNav();
+
+    app.innerHTML = `
+        <div class="page-head">
+            <h1>Who's That Pok\u00e9mon?</h1>
+            <p>Recognize a Pok\u00e9mon from a close-up of its official artwork.</p>
+        </div>
+        <section class="who-game">
+            <div class="who-game-topline">
+                <span>Round <b data-who-round>0</b></span>
+                <span>Score <b data-who-score>0</b></span>
+            </div>
+            <div class="who-game-content">
+                <div class="who-clue-stage" data-who-stage>
+                    <img data-who-image alt="A close-up clue from a Pok\u00e9mon's artwork">
+                </div>
+                <div class="who-answer-area">
+                    <h2>Who is that Pok\u00e9mon?</h2>
+                    <p class="who-game-instructions">Choose the Pok\u00e9mon shown in the cropped artwork.</p>
+                    <div class="who-choices" data-who-choices></div>
+                    <p class="who-game-message" data-who-message role="status" aria-live="polite">Pick your answer.</p>
+                    <div class="who-type-badges" data-who-types aria-label="Pok\u00e9mon types" hidden></div>
+                    <aside class="who-fun-fact" data-who-fact hidden>
+                        <b>Pok\u00e9dex Fun Fact</b>
+                        <p data-who-fact-text></p>
+                        <small data-who-fact-source></small>
+                    </aside>
+                    <button class="who-next-button" type="button" data-who-next hidden>Next Pok\u00e9mon</button>
+                </div>
+            </div>
+        </section>
+    `;
+
+    app.querySelector('[data-who-next]').addEventListener('click', startWhosThatPokemonRound);
+    startWhosThatPokemonRound();
+}
+
+function startWhosThatPokemonRound() {
+    whosThatPokemonCry?.pause();
+    whosThatPokemonCry = null;
+    const pool = list.filter(pokemon => Number.isInteger(pokemon.id) && pokemon.id <= 1025);
+    const choicesNode = app.querySelector('[data-who-choices]');
+    if (!choicesNode) return;
+    if (pool.length < 4) {
+        choicesNode.innerHTML = '<p class="who-game-message">The Pok\u00e9dex list needs to finish loading before the game can start.</p>';
+        return;
+    }
+
+    let unseen = pool.filter(pokemon => !whosThatPokemonSeen.has(pokemon.id));
+    if (unseen.length < 4) {
+        whosThatPokemonSeen.clear();
+        unseen = pool;
+    }
+
+    const target = unseen[Math.floor(Math.random() * unseen.length)];
+    whosThatPokemonSeen.add(target.id);
+    whosThatPokemonRound++;
+    const choices = [target];
+    while (choices.length < 4) {
+        const candidate = pool[Math.floor(Math.random() * pool.length)];
+        if (!choices.some(pokemon => pokemon.id === candidate.id)) choices.push(candidate);
+    }
+    choices.sort(() => Math.random() - 0.5);
+
+    const stage = app.querySelector('[data-who-stage]');
+    const image = app.querySelector('[data-who-image]');
+    const spriteRoot = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
+    const imageCandidates = [...new Set([
+        target.image,
+        `${spriteRoot}/other/home/${target.id}.png`,
+        `${spriteRoot}/other/official-artwork/${target.id}.png`,
+        `${spriteRoot}/${target.id}.png`
+    ].filter(Boolean))];
+    let imageCandidateIndex = 0;
+    image.hidden = false;
+    stage.classList.remove('has-image-error');
+    image.alt = 'A close-up clue from a Pok\u00e9mon\'s artwork';
+    image.onerror = () => {
+        imageCandidateIndex++;
+        if (imageCandidateIndex < imageCandidates.length) {
+            image.src = imageCandidates[imageCandidateIndex];
+            return;
+        }
+        image.hidden = true;
+        stage.classList.add('has-image-error');
+    };
+    image.src = imageCandidates[0] || `${spriteRoot}/${target.id}.png`;
+    stage.classList.remove('is-revealed');
+    stage.style.setProperty('--clue-x', `${22 + Math.floor(Math.random() * 57)}%`);
+    stage.style.setProperty('--clue-y', `${22 + Math.floor(Math.random() * 57)}%`);
+    app.querySelector('[data-who-round]').textContent = whosThatPokemonRound;
+    app.querySelector('[data-who-score]').textContent = whosThatPokemonScore;
+    app.querySelector('[data-who-message]').textContent = 'Pick your answer.';
+    app.querySelector('[data-who-next]').hidden = true;
+    app.querySelector('[data-who-fact]').hidden = true;
+    app.querySelector('[data-who-fact-text]').textContent = '';
+    app.querySelector('[data-who-fact-source]').textContent = '';
+    app.querySelector('[data-who-types]').hidden = true;
+    app.querySelector('[data-who-types]').innerHTML = '';
+    whosThatPokemonFactRequest++;
+    choicesNode.innerHTML = choices.map(pokemon => `
+        <button class="who-choice" type="button" data-who-choice="${pokemon.id}">
+            ${cap(displayPokemonName(pokemon.name))}
+        </button>
+    `).join('');
+
+    choicesNode.querySelectorAll('[data-who-choice]').forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.disabled) return;
+            const correct = Number(button.dataset.whoChoice) === target.id;
+            choicesNode.querySelectorAll('[data-who-choice]').forEach(choice => {
+                choice.disabled = true;
+                if (Number(choice.dataset.whoChoice) === target.id) choice.classList.add('is-correct');
+                else if (choice === button) choice.classList.add('is-incorrect');
+            });
+            if (correct) whosThatPokemonScore++;
+            app.querySelector('[data-who-score]').textContent = whosThatPokemonScore;
+            app.querySelector('[data-who-message]').textContent = correct
+                ? `Correct! It's ${cap(displayPokemonName(target.name))}.`
+                : `Not quite - it's ${cap(displayPokemonName(target.name))}.`;
+            image.alt = cap(displayPokemonName(target.name));
+            stage.classList.add('is-revealed');
+            app.querySelector('[data-who-next]').hidden = false;
+            playWhosThatPokemonCry(target);
+            const resultRequest = ++whosThatPokemonFactRequest;
+            showWhosThatPokemonFact(target, resultRequest);
+            showWhosThatPokemonTypes(target, resultRequest);
+        });
+    });
+}
+
+async function showWhosThatPokemonTypes(pokemon, requestId) {
+    const container = app.querySelector('[data-who-types]');
+    if (!container) return;
+    try {
+        const types = await json(`/api/pokemon/types/${pokemon.id}`);
+        if (requestId !== whosThatPokemonFactRequest || !container.isConnected) return;
+        container.innerHTML = types.map(badge).join('');
+        container.hidden = types.length === 0;
+    } catch {
+        if (requestId === whosThatPokemonFactRequest && container.isConnected) {
+            container.hidden = true;
+            container.innerHTML = '';
+        }
+    }
+}
+
+async function showWhosThatPokemonFact(pokemon, requestId) {
+    const panel = app.querySelector('[data-who-fact]');
+    const factText = app.querySelector('[data-who-fact-text]');
+    const factSource = app.querySelector('[data-who-fact-source]');
+    if (!panel || !factText || !factSource) return;
+    panel.hidden = false;
+    factText.textContent = 'Loading a Pok\u00e9dex fact...';
+
+    try {
+        const species = await json(`/api/pokemon/species/${pokemon.dexNumber || pokemon.id}`);
+        if (requestId !== whosThatPokemonFactRequest || !panel.isConnected) return;
+        const entries = (species.flavor_text_entries || [])
+            .filter(entry => entry.language?.name === 'en')
+            .map(entry => ({
+                text: entry.flavor_text.replace(/[\n\f]/g, ' ').replace(/\s+/g, ' ').trim(),
+                version: entry.version?.name || ''
+            }))
+            .filter(entry => entry.text);
+        const uniqueEntries = [...new Map(entries.map(entry => [entry.text, entry])).values()];
+        if (uniqueEntries.length) {
+            const entry = uniqueEntries[Math.floor(Math.random() * uniqueEntries.length)];
+            factText.textContent = entry.text;
+            factSource.textContent = entry.version
+                ? `Pok\u00e9dex entry \u00b7 Pok\u00e9mon ${cap(entry.version)}`
+                : 'Pok\u00e9dex entry';
+        } else {
+            const genus = species.genera?.find(entry => entry.language?.name === 'en')?.genus;
+            factText.textContent = genus
+                ? `${cap(displayPokemonName(pokemon.name))} is classified as the ${genus}.`
+                : 'No Pok\u00e9dex fun fact is available for this Pok\u00e9mon yet.';
+            factSource.textContent = genus ? 'Pok\u00e9dex classification' : '';
+        }
+    } catch {
+        if (requestId !== whosThatPokemonFactRequest || !panel.isConnected) return;
+        factText.textContent = 'A Pok\u00e9dex fact is unavailable right now.';
+        factSource.textContent = '';
+    }
+}
+
 function trainersPage() {
     current = 'trainers';
 
@@ -3424,7 +4013,7 @@ function renderTrainers() {
                         <div class="trainer-portrait">
                             <span aria-hidden="true">${trainer.name.split(' ').map(part => part[0]).join('')}</span>
                             <img
-                                src="images/trainers/${trainer.portrait || TRAINER_PORTRAITS[trainer.name]}.png"
+                                src="/images/trainers/${trainer.portrait || TRAINER_PORTRAITS[trainer.name]}.png"
                                 alt="${trainer.name}"
                                 width="96"
                                 height="128"
@@ -3443,7 +4032,7 @@ function renderTrainers() {
                             </small>
 
                             <h2>
-                                ${trainer.name}
+                                <button class="trainer-profile-link" data-trainer-profile="${trainer.name}">${trainer.name}</button>
                             </h2>
 
                             <b class="trainer-title">
@@ -3470,7 +4059,7 @@ function renderTrainers() {
                                     title="${cap(displayPokemonName(pokemon.name))}"
                                 >
                                     <img
-                                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"
+                                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png"
                                         alt="${cap(displayPokemonName(pokemon.name))}"
                                     >
 
@@ -3485,6 +4074,13 @@ function renderTrainers() {
                 </article>
             `;
         }).join('');
+
+    results.querySelectorAll('[data-trainer-profile]').forEach(button => {
+        const trainer = trainers.find(item => item.name === button.dataset.trainerProfile);
+        button.closest('.trainer-card').addEventListener('click', event => {
+            if (!event.target.closest('[data-trainer-pokemon]')) showTrainerProfile(trainer);
+        });
+    });
 
     document
         .querySelectorAll(

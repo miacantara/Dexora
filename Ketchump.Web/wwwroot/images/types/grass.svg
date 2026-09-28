@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Grass type badge">
+  <defs>
+    <linearGradient id="badge" x1="18" y1="12" x2="108" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B8F28B"/>
+      <stop offset="1" stop-color="#2D9A50"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="46" y1="42" x2="86" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8FFD1"/>
+      <stop offset="1" stop-color="#8BE16D"/>
+    </linearGradient>
+  </defs>
+  <path d="M64 5 116 25v38c0 30-21 50-52 60C33 113 12 93 12 63V25L64 5Z" fill="url(#badge)" stroke="#246B3A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M88 34C57 34 36 48 36 70c0 15 11 25 26 25 25 0 37-25 31-61l-5 0Z" fill="url(#leaf)" stroke="#246B3A" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M35 96c13-20 28-34 49-48M53 76l-1-18m17 4 16-2" fill="none" stroke="#246B3A" stroke-width="4" stroke-linecap="round"/>
+</svg>

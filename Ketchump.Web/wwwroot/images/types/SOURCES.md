@@ -8,7 +8,7 @@ normal: https://archives.bulbagarden.net/media/upload/f/f7/Johto_Premium_Gym_Bad
 fire: https://archives.bulbagarden.net/media/upload/1/12/Volcano_Badge.png | https://archives.bulbagarden.net/wiki/File:Volcano_Badge.png
 water: https://archives.bulbagarden.net/media/upload/9/9c/Cascade_Badge.png | https://archives.bulbagarden.net/wiki/File:Cascade_Badge.png
 electric: https://archives.bulbagarden.net/media/upload/a/a6/Thunder_Badge.png | https://archives.bulbagarden.net/wiki/File:Thunder_Badge.png
-grass: https://archives.bulbagarden.net/media/upload/b/b5/Rainbow_Badge.png | https://archives.bulbagarden.net/wiki/File:Rainbow_Badge.png
+grass.svg: Original Ketchump leaf-and-shield badge artwork, created for a clear Grass-type symbol in place of Kanto's Rainbow Badge.
 ice: https://archives.bulbagarden.net/media/upload/2/2a/Johto_Premium_Gym_Badge_Set_-_Glacier_Badge.png | https://archives.bulbagarden.net/wiki/File:Johto_Premium_Gym_Badge_Set_-_Glacier_Badge.png
 fighting: https://archives.bulbagarden.net/media/upload/c/c9/Johto_Premium_Gym_Badge_Set_-_Storm_Badge.png | https://archives.bulbagarden.net/wiki/File:Johto_Premium_Gym_Badge_Set_-_Storm_Badge.png
 poison: https://archives.bulbagarden.net/media/upload/7/7d/Soul_Badge.png | https://archives.bulbagarden.net/wiki/File:Soul_Badge.png

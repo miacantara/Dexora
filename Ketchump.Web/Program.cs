@@ -25,5 +25,9 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 app.UseRouting();
+app.MapControllerRoute(
+    name: "pages",
+    pattern: "{page:regex(^(home|pokedex|types|favorites|trainers|whos-that-pokemon)$)}",
+    defaults: new { controller = "Home", action = "Index" });
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();
