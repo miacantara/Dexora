@@ -203,11 +203,9 @@ function bindSignatureZMove(pokemon) {
                 <p class="z-move-kicker">SIGNATURE Z-MOVE</p>
                 <h2 id="zMoveTitle">${move.name}</h2>
                 <p>Requires ${move.crystal} and ${move.move}</p>
-                <button class="z-move-close" type="button">Close</button>
             </div>`;
         const close = () => { if (dialog.open) dialog.close(); };
-        dialog.querySelector('.z-move-close').addEventListener('click', close);
-        dialog.addEventListener('click', event => { if (event.target === dialog) close(); });
+        dialog.addEventListener('click', close);
         dialog.addEventListener('close', () => { trigger.disabled = false; dialog.remove(); }, { once: true });
         document.body.append(dialog);
         trigger.disabled = true;
@@ -243,7 +241,6 @@ const app = document.querySelector('#app');
 
 let list = [];
 let enriched = new Map();
-const pokeCardTypeRequests = new Map();
 let current = 'home';
 let pokemonFoodDataPromise;
 let shinyAudioContext;
@@ -502,15 +499,6 @@ const badge = (type) => {
         </span>
     `;
 };
-
-const typeImageBadge = (type) => `
-    <img
-        class="type-image-badge"
-        src="/images/types/${encodeURIComponent(type.toLowerCase())}.${type.toLowerCase() === 'grass' ? 'svg' : 'png'}"
-        alt="${cap(type)}"
-        title="${cap(type)}"
-        loading="lazy">
-`;
 
 function itemIcon(name) {
     return `/images/items/${name}.png`;
@@ -1222,9 +1210,6 @@ function card(pokemon, types = []) {
 
             <h3>${cap(displayName)}</h3>
 
-            <div class="poke-card-type-badges" data-card-types="${pokemon.id}" aria-label="Pokémon types">
-                ${types.map(typeImageBadge).join('')}
-            </div>
         </article>
     `;
 }
@@ -1295,45 +1280,6 @@ function bindCards() {
             };
         });
 
-    hydratePokeCardTypeBadges();
-}
-
-function hydratePokeCardTypeBadges() {
-    const containers = [...app.querySelectorAll('.poke-card-type-badges[data-card-types]')]
-        .filter(container => !container.childElementCount && !container.dataset.typeLoadStarted);
-    if (!containers.length) return;
-
-    const loadTypes = async container => {
-        const id = Number(container.dataset.cardTypes);
-        if (!Number.isInteger(id)) return;
-        container.dataset.typeLoadStarted = 'true';
-        try {
-            if (!pokeCardTypeRequests.has(id)) {
-                pokeCardTypeRequests.set(id, json(`/api/pokemon/types/${id}`));
-            }
-            const types = await pokeCardTypeRequests.get(id);
-            if (!container.isConnected) return;
-            container.innerHTML = types.map(typeImageBadge).join('');
-            container.setAttribute('aria-label', `Types: ${types.map(cap).join(', ')}`);
-        } catch {
-            pokeCardTypeRequests.delete(id);
-            if (container.isConnected) container.dataset.typeLoadStarted = 'false';
-        }
-    };
-
-    if (!('IntersectionObserver' in window)) {
-        containers.slice(0, 24).forEach(loadTypes);
-        return;
-    }
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            observer.unobserve(entry.target);
-            loadTypes(entry.target);
-        });
-    }, { rootMargin: '250px 0px' });
-    containers.forEach(container => observer.observe(container));
 }
 
 
