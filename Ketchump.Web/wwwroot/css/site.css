@@ -284,12 +284,6 @@ main {
 .types button {
     flex: 0 0 auto;
     scroll-snap-align: start;
-    border: 2px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    border-radius: 999px;
-    padding: 10px 16px;
-    font-weight: 700;
 }
 
 .grid {
