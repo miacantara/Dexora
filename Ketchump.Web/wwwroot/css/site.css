@@ -328,27 +328,6 @@ main {
     margin: 4px 0 10px;
 }
 
-.poke-card-type-badges {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    min-height: 0;
-}
-
-.poke-card .type-image-badge {
-    width: 28px;
-    height: 28px;
-    padding: 3px;
-    object-fit: contain;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    background: var(--surface);
-}
-
 .heart {
     position: absolute;
     right: 12px;
@@ -704,23 +683,7 @@ html[data-theme=dark] .z-move-prompt {
 
 .z-move-show > p:not(.z-move-kicker) { 
     color: #ffffffc9; 
-    font-size: 14px; }
-
-.z-move-close { 
-    min-height: 42px; 
-    margin-top: 14px; 
-    padding: 9px 22px; 
-    border: 1px solid color-mix(in srgb, var(--z-color) 70%, transparent); 
-    border-radius: 22px; 
-    background: #10101fb5; 
-    color: white; 
-    font: inherit; 
-    font-weight: 700; 
-    cursor: pointer; }
-
-.z-move-close:hover, .z-move-close:focus-visible { 
-    background: var(--z-color); 
-    color: #11111a; 
+    font-size: 14px; 
 }
 
 .z-move-cinematic[data-effect=electric] .z-move-symbol, .z-move-cinematic[data-effect=surf] .z-move-symbol { 
