@@ -1,0 +1,27 @@
+﻿Battle item artwork. Copyright The Pokemon Company / Nintendo / GAME FREAK.
+Source: https://www.serebii.net/legendsz-a/items.shtml
+160x160 artwork; Z-A preferred, Scarlet/Violet for unavailable items.
+
+choice-specs.png - https://www.serebii.net/itemdex/sprites/sv/choicespecs.png
+choice-band.png - https://www.serebii.net/itemdex/sprites/sv/choiceband.png
+life-orb.png - https://www.serebii.net/itemdex/sprites/za/lifeorb.png
+choice-scarf.png - https://www.serebii.net/itemdex/sprites/sv/choicescarf.png
+leftovers.png - https://www.serebii.net/itemdex/sprites/za/leftovers.png
+charcoal.png - https://www.serebii.net/itemdex/sprites/za/charcoal.png
+mystic-water.png - https://www.serebii.net/itemdex/sprites/za/mysticwater.png
+miracle-seed.png - https://www.serebii.net/itemdex/sprites/za/miracleseed.png
+magnet.png - https://www.serebii.net/itemdex/sprites/za/magnet.png
+never-melt-ice.png - https://www.serebii.net/itemdex/sprites/za/never-meltice.png
+black-belt.png - https://www.serebii.net/itemdex/sprites/za/blackbelt.png
+poison-barb.png - https://www.serebii.net/itemdex/sprites/za/poisonbarb.png
+soft-sand.png - https://www.serebii.net/itemdex/sprites/za/softsand.png
+sharp-beak.png - https://www.serebii.net/itemdex/sprites/za/sharpbeak.png
+twisted-spoon.png - https://www.serebii.net/itemdex/sprites/za/twistedspoon.png
+silver-powder.png - https://www.serebii.net/itemdex/sprites/za/silverpowder.png
+hard-stone.png - https://www.serebii.net/itemdex/sprites/za/hardstone.png
+spell-tag.png - https://www.serebii.net/itemdex/sprites/za/spelltag.png
+dragon-fang.png - https://www.serebii.net/itemdex/sprites/za/dragonfang.png
+black-glasses.png - https://www.serebii.net/itemdex/sprites/za/blackglasses.png
+metal-coat.png - https://www.serebii.net/itemdex/sprites/za/metalcoat.png
+fairy-feather.png - https://www.serebii.net/itemdex/sprites/za/fairyfeather.png
+silk-scarf.png - https://www.serebii.net/itemdex/sprites/za/silkscarf.png

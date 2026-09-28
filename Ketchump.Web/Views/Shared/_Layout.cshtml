@@ -54,6 +54,10 @@
                 Trainers
             </button>
 
+            <button data-page="whos-that-pokemon">
+                Who's That Pokémon?
+            </button>
+
             <button data-page="favorites">
                 My Pokémon
 
@@ -106,6 +110,14 @@
             <span>Trainers</span>
         </button>
 
+        <button data-page="whos-that-pokemon" aria-label="Who's That Pokémon?">
+            <svg class="mobile-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M9.6 9a2.5 2.5 0 1 1 4.1 1.9c-1 .8-1.7 1.1-1.7 2.6M12 17h.01" />
+            </svg>
+            <span>Who's That?</span>
+        </button>
+
         <button data-page="favorites">
             <svg class="mobile-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <circle cx="12" cy="12" r="9" />
@@ -129,9 +141,7 @@
 
 
     <!-- Scripts -->
-    <script src="~/js/app.js"
-            asp-append-version="true">
-    </script>
+    <script src="~/js/app.js" asp-append-version="true"></script>
 
 </body>
 

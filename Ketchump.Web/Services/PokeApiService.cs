@@ -39,7 +39,7 @@ public class PokeApiService(IHttpClientFactory factory, IMemoryCache cache)
             if (species is null || species.Id > limit) continue;
             output.Add(new {
                 id, name, speciesName = species.Name, dexNumber = species.Id,
-                image = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png"
+                image = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/{id}.png"
             });
         }
         return output;
@@ -89,6 +89,14 @@ public class PokeApiService(IHttpClientFactory factory, IMemoryCache cache)
         }));
         await Task.WhenAll(speciesTask, evolutionTask, abilitiesTask, typesTask);
         return new { pokemon = p, species = await speciesTask, types = await typesTask, evolution = await evolutionTask, abilities = await abilitiesTask };
+    }
+    public async Task<JsonElement> GetPokemonSpeciesAsync(string id) => await Get($"pokemon-species/{id}");
+    public async Task<string[]> GetPokemonTypesAsync(string id)
+    {
+        var pokemon = await Get($"pokemon/{id}");
+        return pokemon.GetProperty("types").EnumerateArray()
+            .Select(slot => slot.GetProperty("type").GetProperty("name").GetString()!)
+            .ToArray();
     }
     private async Task<object?> GetEvolutionAsync(Task<JsonElement> speciesTask)
     {

@@ -10,6 +10,10 @@ public class PokemonController(PokeApiService service) : ControllerBase
     public async Task<IActionResult> List([FromQuery]int limit=151) => Ok(await service.GetPokemonListAsync(Math.Clamp(limit,1,1025)));
     [HttpGet("{id}")]
     public async Task<IActionResult> Detail(string id) => Ok(await service.GetPokemonDetailAsync(id));
+    [HttpGet("species/{id}")]
+    public async Task<IActionResult> Species(string id) => Ok(await service.GetPokemonSpeciesAsync(id));
+    [HttpGet("types/{id}")]
+    public async Task<IActionResult> Types(string id) => Ok(await service.GetPokemonTypesAsync(id));
     [HttpGet("type/{name}")]
     public async Task<IActionResult> Type(string name) => Ok(await service.GetTypeAsync(name));
 }
