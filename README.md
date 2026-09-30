@@ -6,7 +6,7 @@ Pokémon and all related names, characters, artwork, audio, trademarks, and othe
 
 ## About
 
-KETCHUMP is a Pokémon encyclopedia built with **ASP.NET Core MVC**. It allows users to explore Pokémon, learn about their abilities and type matchups, save favorites, and browse trainer teams from the games and anime.
+KETCHUMP is a Pokémon encyclopedia built with **ASP.NET Core MVC**. It allows users to explore Pokémon, learn about their abilities and type matchups, save favorites, browse trainer teams from the games and anime, and test their knowledge with two Pokémon guessing games.
 
 ## Features
 
@@ -18,6 +18,18 @@ KETCHUMP is a Pokémon encyclopedia built with **ASP.NET Core MVC**. It allows u
 * Browse game Champions, Ash's anime companions, and Team Rocket by series.
 * View recently visited Pokémon on the home page.
 * Explore trainer profiles and the Pokémon on their teams.
+* Play **Who's That Pokémon?** with two games: **Close-up Challenge** and **Silhouette Challenge**.
+
+## Who's That Pokémon?
+
+Choose a game from the Who's That Pokémon? page:
+
+* **Close-up Challenge** — identify a Pokémon from a magnified crop of its artwork.
+* **Silhouette Challenge** — identify a Pokémon from its full black silhouette.
+
+Each round offers four answers. After a guess, the game reveals the Pokémon and highlights the correct answer. Correct guesses increase your score. The reveal also plays the Pokémon's cry and displays its types and a Pokédex fun fact when available.
+
+Select **Next Pokémon** to continue. Switching games starts a new session and resets the round and score counters.
 
 ## Tech Stack
 

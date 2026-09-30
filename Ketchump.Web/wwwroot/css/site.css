@@ -649,15 +649,73 @@ html[data-theme=dark] .z-move-prompt {
     font-size: clamp(130px, 28vw, 310px); 
     line-height: 1; 
     filter: drop-shadow(0 0 24px var(--z-color)); 
-    animation: z-symbol-arrive .8s cubic-bezier(.14,.83,.29,1.24) both; 
+    opacity: .85;
 }
 
-.z-move-symbol svg {
-    display: block;
+.z-energy-orb {
+    position: relative;
+    display: grid;
+    place-items: center;
     width: 1em;
     height: 1em;
-    overflow: visible;
-    fill: currentColor;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 32%, #fff 0%, #ffffffe6 8%, color-mix(in srgb, var(--z-color) 35%, white) 22%, var(--z-color) 48%, color-mix(in srgb, var(--z-color) 45%, transparent) 68%, transparent 74%);
+    box-shadow: inset -10px -14px 30px #00000030, inset 6px 8px 24px #ffffff80, 0 0 28px var(--z-color), 0 0 75px color-mix(in srgb, var(--z-color) 65%, transparent);
+    animation: z-orb-glow 2.4s ease-in-out infinite;
+}
+
+.z-activation-burst {
+    position: absolute;
+    inset: -20%;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, #ffffffb3 0%, var(--z-color) 22%, transparent 68%);
+    animation: z-activation-burst .85s ease-out both;
+}
+
+.z-orbit {
+    position: absolute;
+    inset: -18%;
+    pointer-events: none;
+    transform: rotate(var(--orbit-angle));
+    animation: z-orbit 10s linear var(--orbit-delay) infinite;
+}
+
+.z-orbit > span {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: clamp(4px, .025em, 8px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--z-color) 45%, white);
+    box-shadow: 0 0 10px var(--z-color), 0 0 20px var(--z-color);
+}
+
+.z-orbit:nth-of-type(even) { inset: -28%; animation-direction: reverse; opacity: .65; }
+
+@keyframes z-orbit { to { transform: rotate(calc(var(--orbit-angle) + 360deg)); } }
+@keyframes z-activation-burst {
+    from { opacity: .85; transform: scale(.25); }
+    to { opacity: 0; transform: scale(1.65); }
+}
+
+.z-energy-orb::before, .z-energy-orb::after {
+    content: "";
+    position: absolute;
+    inset: -10%;
+    border: 2px solid transparent;
+    border-top-color: #ffffffb3;
+    border-bottom-color: var(--z-color);
+    border-radius: 50%;
+    transform: rotate(-32deg) scaleY(.72);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--z-color) 45%, transparent);
+}
+
+.z-energy-orb::after {
+    inset: -17%;
+    transform: rotate(48deg) scaleY(.8);
+    opacity: .65;
 }
 
 .z-move-pokemon { 
@@ -693,10 +751,6 @@ html[data-theme=dark] .z-move-prompt {
     color: #ffffffc9; 
     font-size: 14px; }
 
-.z-move-cinematic[data-effect=electric] .z-move-symbol, .z-move-cinematic[data-effect=surf] .z-move-symbol { 
-    animation: z-electric .9s steps(2, end) infinite; 
-}
-
 .z-move-cinematic[data-effect=surf] .z-move-show::before { 
     animation-name: z-wave; 
 }
@@ -705,36 +759,12 @@ html[data-theme=dark] .z-move-prompt {
     animation-name: z-wave; 
 }
 
-.z-move-cinematic[data-effect=boost] .z-move-symbol, .z-move-cinematic[data-effect=aura] .z-move-symbol { 
-    animation-name: z-boost; 
-}
-
 .z-move-cinematic[data-effect=impact] .z-move-pokemon, .z-move-cinematic[data-effect=shards] .z-move-pokemon { 
     animation-name: z-impact; 
 }
 
-.z-move-cinematic[data-effect=shards] .z-move-symbol { 
-    animation-name: z-shards; 
-}
-
-.z-move-cinematic[data-effect=psychic] .z-move-symbol, .z-move-cinematic[data-effect=prism] .z-move-symbol { 
-    animation-name: z-cosmic; 
-}
-
-.z-move-cinematic[data-effect=spectral] .z-move-symbol, .z-move-cinematic[data-effect=shadow] .z-move-symbol { 
-    animation-name: z-spectral; 
-}
-
 .z-move-cinematic[data-effect=dark] .z-move-show::before, .z-move-cinematic[data-effect=lunar] .z-move-show::before { 
     animation-name: z-eclipse; 
-}
-
-.z-move-cinematic[data-effect=sonic] .z-move-symbol { 
-    animation-name: z-sonic; 
-}
-
-.z-move-cinematic[data-effect=heart] .z-move-symbol { 
-    animation-name: z-heartbeat; 
 }
 
 .z-move-cinematic[data-effect=solar] .z-move-show::before, .z-move-cinematic[data-effect=prism] .z-move-show::after { 
@@ -747,7 +777,20 @@ html[data-theme=dark] .z-move-prompt {
 
 @keyframes z-ring { 0% { opacity: 0; transform: scale(.2) rotate(-20deg); } 40% { opacity: .9; } 100% { opacity: 0; transform: scale(1.55) rotate(28deg); } }
 
-@keyframes z-symbol-arrive { 0% { opacity: 0; transform: scale(.15) rotate(-32deg); } 45% { opacity: .5; } 100% { opacity: .16; transform: scale(1) rotate(0); } }
+@keyframes z-symbol-arrive { 0% { opacity: 0; transform: scale(.15) rotate(-32deg); } 45% { opacity: .5; } 100% { opacity: .55; transform: scale(1) rotate(0); } }
+
+@keyframes z-orb-glow {
+    0%, 100% {
+        filter: brightness(1);
+        transform: scale(1);
+        box-shadow: inset -10px -14px 30px #00000030, inset 6px 8px 24px #ffffff80, 0 0 28px var(--z-color), 0 0 75px color-mix(in srgb, var(--z-color) 65%, transparent);
+    }
+    50% {
+        filter: brightness(1.3);
+        transform: scale(1.05);
+        box-shadow: inset -10px -14px 30px #00000030, inset 6px 8px 30px #ffffffa6, 0 0 44px var(--z-color), 0 0 110px color-mix(in srgb, var(--z-color) 80%, transparent);
+    }
+}
 
 @keyframes z-pokemon-arrive { 0% { opacity: 0; transform: translateY(45px) scale(.65); } 75% { opacity: 1; transform: translateY(-8px) scale(1.06); } 100% { transform: translateY(0) scale(1); } }
 
@@ -776,6 +819,9 @@ html[data-theme=dark] .z-move-prompt {
 @keyframes z-solar { 0%,100% { opacity: .14; transform: scale(.82); } 45% { opacity: .95; transform: scale(1.32); } }
 
 @media (prefers-reduced-motion: reduce) {
+    .z-orbit { animation: none; }
+    .z-activation-burst { display: none; }
+    .z-energy-orb { animation: none; }
     .z-move-show, .z-move-show::before, .z-move-show::after, .z-move-symbol, .z-move-pokemon, .z-move-show h2, .z-move-cinematic::backdrop { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 
@@ -1274,7 +1320,6 @@ footer {
 .trainer-profile form {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 20px;
 }
 
 .trainer-profile dt {
@@ -1301,7 +1346,6 @@ footer {
 
 .trainer-head {
     display: flex;
-    align-items: center;
     gap: 16px;
     margin-bottom: 18px;
 }
@@ -1346,6 +1390,42 @@ footer {
 
 .trainer-art-credit a {
     color: inherit;
+}
+
+.who-game-selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 940px;
+    margin: 0 auto 20px;
+}
+
+.who-game-selector button {
+    padding: 16px;
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.who-game-selector button[aria-pressed="true"] {
+    border-color: var(--red);
+    background: color-mix(in srgb, var(--red) 8%, var(--surface));
+}
+
+.who-game-selector button:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 3px;
+}
+
+.who-game-selector span {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 13px;
 }
 
 .who-game {
@@ -1408,6 +1488,19 @@ footer {
     display: none;
 }
 
+.who-clue-stage.is-silhouette {
+    background: radial-gradient(ellipse at center, #fff 0%, #dbeafe 70%, #bfdbfe 100%);
+}
+
+.who-clue-stage.is-silhouette:not(.is-revealed) img {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    transform: none;
+    filter: brightness(0);
+    transition: none;
+}
+
 .who-clue-stage.is-revealed img {
     position: absolute;
     top: 50%;
@@ -1454,6 +1547,7 @@ footer {
 .who-answer-area h2 {
     margin: 0 0 6px;
     font-size: clamp(22px, 3vw, 30px);
+    text-wrap: nowrap;
 }
 
 .who-game-instructions,
