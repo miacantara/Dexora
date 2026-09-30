@@ -85,71 +85,71 @@ const COLORS = {
 const SIGNATURE_Z_MOVES = [
     {
         forms: ["pikachu"],
-        name: "Catastropika", crystal: "Pikanium Z", move: "Volt Tackle", effect: "electric"
+        name: "Catastropika", crystal: "Pikanium Z", move: "Volt Tackle", type: "electric", effect: "electric"
     },
     {
         forms: ["pikachu-original-cap", "pikachu-hoenn-cap", "pikachu-sinnoh-cap", "pikachu-unova-cap", "pikachu-kalos-cap", "pikachu-alola-cap", "pikachu-partner-cap"],
-        name: "10,000,000 Volt Thunderbolt", crystal: "Pikashunium Z", move: "Thunderbolt", effect: "electric"
+        name: "10,000,000 Volt Thunderbolt", crystal: "Pikashunium Z", move: "Thunderbolt", type: "electric", effect: "electric"
     },
     {
         forms: ["raichu-alola"],
-        name: "Stoked Sparksurfer", crystal: "Aloraichium Z", move: "Thunderbolt", effect: "surf"
+        name: "Stoked Sparksurfer", crystal: "Aloraichium Z", move: "Thunderbolt", type: "electric", effect: "surf"
     },
     {
         forms: ["eevee"],
-        name: "Extreme Evoboost", crystal: "Eevium Z", move: "Last Resort", effect: "boost"
+        name: "Extreme Evoboost", crystal: "Eevium Z", move: "Last Resort", type: "normal", effect: "boost"
     },
     {
         forms: ["snorlax"],
-        name: "Pulverizing Pancake", crystal: "Snorlium Z", move: "Giga Impact", effect: "impact"
+        name: "Pulverizing Pancake", crystal: "Snorlium Z", move: "Giga Impact", type: "normal", effect: "impact"
     },
     {
         forms: ["mew"],
-        name: "Genesis Supernova", crystal: "Mewnium Z", move: "Psychic", effect: "psychic"
+        name: "Genesis Supernova", crystal: "Mewnium Z", move: "Psychic", type: "psychic", effect: "psychic"
     },
     {
         forms: ["decidueye"],
-        name: "Sinister Arrow Raid", crystal: "Decidium Z", move: "Spirit Shackle", effect: "spectral"
+        name: "Sinister Arrow Raid", crystal: "Decidium Z", move: "Spirit Shackle", type: "ghost", effect: "spectral"
     },
     {
         forms: ["incineroar"],
-        name: "Malicious Moonsault", crystal: "Incinium Z", move: "Darkest Lariat", effect: "dark"
+        name: "Malicious Moonsault", crystal: "Incinium Z", move: "Darkest Lariat", type: "dark", effect: "dark"
     },
     {
         forms: ["primarina"],
-        name: "Oceanic Operetta", crystal: "Primarium Z", move: "Sparkling Aria", effect: "wave"
+        name: "Oceanic Operetta", crystal: "Primarium Z", move: "Sparkling Aria", type: "water", effect: "wave"
     },
     {
         forms: ["tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini"],
-        name: "Guardian of Alola", crystal: "Tapunium Z", move: "Nature's Madness", effect: "aura"
+        name: "Guardian of Alola", crystal: "Tapunium Z", move: "Nature's Madness", type: "fairy", effect: "aura"
     },
     {
         forms: ["marshadow"],
-        name: "Soul-Stealing 7-Star Strike", crystal: "Marshadium Z", move: "Spectral Thief", effect: "shadow"
+        name: "Soul-Stealing 7-Star Strike", crystal: "Marshadium Z", move: "Spectral Thief", type: "ghost", effect: "shadow"
     },
     {
         forms: ["kommo-o"],
-        name: "Clangorous Soulblaze", crystal: "Kommonium Z", move: "Clanging Scales", effect: "sonic"
+        name: "Clangorous Soulblaze", crystal: "Kommonium Z", move: "Clanging Scales", type: "dragon", effect: "sonic"
     },
     {
         forms: ["lycanroc-midday", "lycanroc-midnight", "lycanroc-dusk"],
-        name: "Splintered Stormshards", crystal: "Lycanium Z", move: "Stone Edge", effect: "shards"
+        name: "Splintered Stormshards", crystal: "Lycanium Z", move: "Stone Edge", type: "rock", effect: "shards"
     },
     {
         forms: ["mimikyu-disguised", "mimikyu-busted"],
-        name: "Let's Snuggle Forever", crystal: "Mimikium Z", move: "Play Rough", effect: "heart"
+        name: "Let's Snuggle Forever", crystal: "Mimikium Z", move: "Play Rough", type: "fairy", effect: "heart"
     },
     {
         forms: ["solgaleo", "necrozma-dusk"],
-        name: "Searing Sunraze Smash", crystal: "Solganium Z", move: "Sunsteel Strike", effect: "solar"
+        name: "Searing Sunraze Smash", crystal: "Solganium Z", move: "Sunsteel Strike", type: "steel", effect: "solar"
     },
     {
         forms: ["lunala", "necrozma-dawn"],
-        name: "Menacing Moonraze Maelstrom", crystal: "Lunalium Z", move: "Moongeist Beam", effect: "lunar"
+        name: "Menacing Moonraze Maelstrom", crystal: "Lunalium Z", move: "Moongeist Beam", type: "ghost", effect: "lunar"
     },
     {
         forms: ["necrozma-ultra"],
-        name: "Light That Burns the Sky", crystal: "Ultranecrozium Z", move: "Photon Geyser", effect: "prism"
+        name: "Light That Burns the Sky", crystal: "Ultranecrozium Z", move: "Photon Geyser", type: "psychic", effect: "prism"
     }
 ];
 
@@ -182,37 +182,18 @@ function bindSignatureZMove(pokemon) {
         const image = app.querySelector('.profile-clean-animation');
         const move = SIGNATURE_Z_MOVES.find(entry => entry.name === trigger.dataset.zMove);
         if (!move) return;
-        const colorType = move.effect === 'wave' || move.effect === 'surf' ? 'water' :
-            move.effect === 'solar' || move.effect === 'impact' || move.effect === 'shards' ? 'fire' :
-            move.effect === 'heart' || move.effect === 'aura' || move.effect === 'boost' ? 'fairy' :
-            move.effect === 'dark' || move.effect === 'shadow' || move.effect === 'spectral' ? 'ghost' :
-            move.effect === 'electric' ? 'electric' :
-            move.effect === 'lunar' || move.effect === 'psychic' ? 'psychic' : 'dragon';
-        // Inline vector art avoids platform-specific emoji and font glyph rendering.
-        const effectSymbols = {
-            electric: '<path d="M13.5 2 5 13h6l-.5 9L19 10h-6z"/>',
-            surf: '<path d="M2 14c2.5-4 5-4 7.5 0s5 4 7.5 0 5-4 7 0M2 19c2.5-4 5-4 7.5 0s5 4 7.5 0 5-4 7 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
-            boost: '<path d="m12 1.8 2.7 7.1 7.5.4-5.8 4.8 1.9 7.3-6.3-4.1-6.3 4.1 1.9-7.3-5.8-4.8 7.5-.4z"/>',
-            impact: '<path d="M12 1.5 14.5 8l6.9-3.2-3.2 6.9 6.3 2.3-6.3 2.3 3.2 6.9-6.9-3.2-2.5 6.5-2.5-6.5-6.9 3.2 3.2-6.9L-.5 14l6.3-2.3-3.2-6.9L9.5 8z" transform="translate(1 0) scale(.92)"/>',
-            psychic: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M1 12h3m16 0h3" fill="none" stroke="currentColor" stroke-width="2"/>',
-            spectral: '<path d="M3 21 20 4m-8 0h8v8M4 4l5 1-4 4-1-5zm12 11 5 1-4 4-1-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
-            dark: '<path d="M20.5 15A9 9 0 0 1 9 3.5 9 9 0 1 0 20.5 15Z"/>',
-            wave: '<path d="M2 15c2.5-5 5-5 7.5 0s5 5 7.5 0 5-5 7 0M4 8c2-3 4-3 6 0s4 3 6 0 4-3 6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
-            aura: '<circle cx="12" cy="12" r="3"/><path d="M12 1.5v4m0 13v4M1.5 12h4m13 0h4M4.6 4.6l2.8 2.8m9.2 9.2 2.8 2.8m0-14.8-2.8 2.8m-9.2 9.2-2.8 2.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
-            shadow: '<path d="M12 2a10 10 0 1 0 0 20c-3-2.5-3-6.5 0-10s3-7.5 0-10Z"/><path d="M12 2c3 2.5 3 6.5 0 10s-3 7.5 0 10" fill="none" stroke="currentColor" stroke-width="1.5"/>',
-            sonic: '<path d="M3 9v6h4l5 4V5L7 9H3Zm13-1a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
-            shards: '<path d="m12 2 3 7 7-3-3 7 3 3-8 1-2 5-3-7-7-3 7-2z"/>',
-            heart: '<path d="M12 21S3 15.5 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
-            solar: '<circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1m0-15.6-2.1 2.1M6.3 17.7l-2.1 2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
-            lunar: '<path d="M20.5 15A9 9 0 0 1 9 3.5 9 9 0 1 0 20.5 15Z"/>',
-            prism: '<path d="m12 2 9 18H3L12 2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m12 2 1 18m8-18-9 18" fill="none" stroke="currentColor" stroke-width="1.5"/>'
-        };
+        // Use the move's type, independently of its animation effect.
+        const colorType = move.type;
         dialog.className = 'z-move-cinematic';
         dialog.dataset.effect = move.effect;
         dialog.setAttribute('aria-labelledby', 'zMoveTitle');
         dialog.innerHTML = `
             <div class="z-move-show" style="--z-color:${COLORS[colorType]}">
-                <span class="z-move-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false">${effectSymbols[move.effect]}</svg></span>
+                <span class="z-move-symbol" aria-hidden="true">
+                    <span class="z-activation-burst"></span>
+                    <span class="z-energy-orb"></span>
+                    ${Array.from({ length: 8 }, (_, i) => `<span class="z-orbit" style="--orbit-angle:${i * 45}deg;--orbit-delay:${-i * 1.25}s"><span></span></span>`).join('')}
+                </span>
                 ${image ? `<img src="${image.currentSrc || image.src}" alt="${cap(displayPokemonName(pokemon.name))}" class="z-move-pokemon">` : ''}
                 <p class="z-move-kicker">SIGNATURE Z-MOVE</p>
                 <h2 id="zMoveTitle">${move.name}</h2>
@@ -220,7 +201,11 @@ function bindSignatureZMove(pokemon) {
             </div>`;
         const close = () => { if (dialog.open) dialog.close(); };
         dialog.addEventListener('click', close);
-        dialog.addEventListener('close', () => { trigger.disabled = false; dialog.remove(); }, { once: true });
+        dialog.addEventListener('close', () => {
+            trigger.disabled = false;
+            dialog.remove();
+            trigger.focus();
+        }, { once: true });
         document.body.append(dialog);
         trigger.disabled = true;
         dialog.showModal();
@@ -1472,11 +1457,10 @@ async function pokedex(
 
     app.innerHTML = `
         <div class="page-head">
-            <h1>Pokédex</h1>
+            <h1>Gotta Know ’Em All</h1>
 
             <p>
-                Explore and discover Pokémon
-                from every generation.
+                Explore Pokémon across every generation and discover what makes each one unique.
             </p>
         </div>
 
@@ -1700,12 +1684,10 @@ function typesPage() {
 
     app.innerHTML = `
         <div class="page-head">
-            <h1>Pokémon Types</h1>
+            <h1>What Beats What?</h1>
 
             <p>
-                Explore type strengths,
-                weaknesses and Pokémon
-                belonging to each type.
+               Master type matchups, spot weaknesses, and find the Pokémon with the advantage.
             </p>
         </div>
 
@@ -1886,23 +1868,22 @@ function renderFavorites() {
     if (!favs.length) {
         app.innerHTML = `
             <div class="page-head">
-                <h1>My Pokémon</h1>
+                <h1>Your Poké Picks</h1>
 
                 <p>
-                    Your saved Pokémon collection.
+                    Your favorite Pokémon, all in one place.
                 </p>
             </div>
 
             <div class="empty">
-                <h2>No Pokémon saved yet.</h2>
+                <h2>Looks like they all got away!</h2>
 
                 <p>
-                    Explore the Pokédex and tap
-                    the pokeball to save your favorites.
+                   Explore the Pokédex and tap the Poké Ball to start building your favorites.
                 </p>
 
                 <button id="explorePokemon">
-                    Explore Pokémon
+                    See Who’s Out There
                 </button>
             </div>
         `;
@@ -1934,10 +1915,10 @@ function renderFavorites() {
 
     app.innerHTML = `
         <div class="page-head">
-            <h1>My Pokémon</h1>
+            <h1>Your Poké Picks</h1>
 
             <p>
-                ${saved.length} saved Pokémon
+                ${saved.length} Pokémon have joined your team!
             </p>
         </div>
 
@@ -3512,7 +3493,7 @@ function showTrainerProfile(trainer) {
         <div class="trainer-head">
             <div class="trainer-portrait">
                 <span aria-hidden="true">${trainer.name.split(' ').map(part => part[0]).join('')}</span>
-                <img src="/images/trainers/${trainer.portrait || TRAINER_PORTRAITS[trainer.name]}.png"
+                <img src="/images/trainers/${trainer.portrait || TRAINER_PORTRAITS[trainer.name]}.png?v=masters-1"
                     alt="${trainer.name}" onerror="this.hidden = true">
             </div>
             <div><h2 id="trainerProfileName">${trainer.name}</h2>
@@ -3542,6 +3523,7 @@ let whosThatPokemonScore = 0;
 let whosThatPokemonRound = 0;
 let whosThatPokemonFactRequest = 0;
 let whosThatPokemonCry;
+let whosThatPokemonMode = 'crop';
 
 function playWhosThatPokemonCry(pokemon) {
     whosThatPokemonCry?.pause();
@@ -3557,7 +3539,9 @@ function playWhosThatPokemonCry(pokemon) {
     });
 }
 
-function whosThatPokemonPage() {
+function whosThatPokemonPage(mode = 'crop') {
+    whosThatPokemonMode = mode === 'silhouette' ? 'silhouette' : 'crop';
+    const silhouette = whosThatPokemonMode === 'silhouette';
     current = 'whos-that-pokemon';
     whosThatPokemonSeen = new Set();
     whosThatPokemonScore = 0;
@@ -3567,8 +3551,16 @@ function whosThatPokemonPage() {
 
     app.innerHTML = `
         <div class="page-head">
-            <h1>Who's That Pok\u00e9mon?</h1>
-            <p>Recognize a Pok\u00e9mon from a close-up of its official artwork.</p>
+            <h1>Ready to Test Your Trainer Skills?</h1>
+            <p>Two challenges await. Think you can ace them both?</p>
+        </div>
+        <div class="who-game-selector" role="group" aria-label="Choose a guessing game">
+            <button type="button" data-who-mode="crop" aria-pressed="${!silhouette}">
+                <b>Close-up Challenge</b><span>Guess from a tiny glimpse.</span>
+            </button>
+            <button type="button" data-who-mode="silhouette" aria-pressed="${silhouette}">
+                <b>Silhouette Challenge</b><span>Guess from the shadow.</span>
+            </button>
         </div>
         <section class="who-game">
             <div class="who-game-topline">
@@ -3576,12 +3568,12 @@ function whosThatPokemonPage() {
                 <span>Score <b data-who-score>0</b></span>
             </div>
             <div class="who-game-content">
-                <div class="who-clue-stage" data-who-stage>
+                <div class="who-clue-stage${silhouette ? ' is-silhouette' : ''}" data-who-stage>
                     <img data-who-image alt="A close-up clue from a Pok\u00e9mon's artwork">
                 </div>
                 <div class="who-answer-area">
-                    <h2>Who is that Pok\u00e9mon?</h2>
-                    <p class="who-game-instructions">Choose the Pok\u00e9mon shown in the cropped artwork.</p>
+                    <h2>${silhouette ? "A Wild Silhouette Appeared!" : 'Caught a Glimpse!'}</h2>
+                    <p class="who-game-instructions">${silhouette ? 'Think you know this Pokémon? Make your guess and reveal the answer.' : 'Look closely at the crop and trust your Trainer instincts'}</p>
                     <div class="who-choices" data-who-choices></div>
                     <p class="who-game-message" data-who-message role="status" aria-live="polite">Pick your answer.</p>
                     <div class="who-type-badges" data-who-types aria-label="Pok\u00e9mon types" hidden></div>
@@ -3596,6 +3588,13 @@ function whosThatPokemonPage() {
         </section>
     `;
 
+    app.querySelectorAll('[data-who-mode]').forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.dataset.whoMode === whosThatPokemonMode) return;
+            whosThatPokemonPage(button.dataset.whoMode);
+            app.querySelector(`[data-who-mode="${whosThatPokemonMode}"]`).focus();
+        });
+    });
     app.querySelector('[data-who-next]').addEventListener('click', startWhosThatPokemonRound);
     startWhosThatPokemonRound();
 }
@@ -3639,7 +3638,9 @@ function startWhosThatPokemonRound() {
     let imageCandidateIndex = 0;
     image.hidden = false;
     stage.classList.remove('has-image-error');
-    image.alt = 'A close-up clue from a Pok\u00e9mon\'s artwork';
+    image.alt = whosThatPokemonMode === 'silhouette'
+        ? 'A silhouette of a mystery Pokémon'
+        : 'A close-up clue from a Pok\u00e9mon\'s artwork';
     image.onerror = () => {
         imageCandidateIndex++;
         if (imageCandidateIndex < imageCandidates.length) {
@@ -3762,12 +3763,10 @@ function trainersPage() {
 
     app.innerHTML = `
         <div class="page-head">
-            <h1>Trainers & Champions</h1>
+            <h1>Trainers. Rivals. Legends.</h1>
 
             <p>
-                Explore Ash's companions, Team Rocket,
-                and main-series Champions with their Pokémon teams.
-                Each trainer appears once with their combined Pokémon.
+                Meet the faces behind unforgettable Pokémon teams, from trusted companions to legendary Champions.
             </p>
         </div>
 
@@ -3806,11 +3805,6 @@ function trainersPage() {
             </select>
         </div>
 
-        <div class="trainer-note">
-            Pokémon teams can change within an anime
-            series, episode, game version or rematch.
-            Select a series to see Pokémon from that series only.
-        </div>
 
         <div
             id="trainerResults"
@@ -3973,7 +3967,7 @@ function renderTrainers() {
                         <div class="trainer-portrait">
                             <span aria-hidden="true">${trainer.name.split(' ').map(part => part[0]).join('')}</span>
                             <img
-                                src="/images/trainers/${trainer.portrait || TRAINER_PORTRAITS[trainer.name]}.png"
+                                src="/images/trainers/${trainer.portrait || TRAINER_PORTRAITS[trainer.name]}.png?v=masters-1"
                                 alt="${trainer.name}"
                                 width="96"
                                 height="128"
@@ -3983,13 +3977,6 @@ function renderTrainers() {
                             >
                         </div>
                         <div>
-                            <small>
-                                ${trainer.source}
-                                ·
-                                ${trainer.series}
-                                ·
-                                ${trainer.region}
-                            </small>
 
                             <h2>
                                 <button class="trainer-profile-link" data-trainer-profile="${trainer.name}">${trainer.name}</button>
