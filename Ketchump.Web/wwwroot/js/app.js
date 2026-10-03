@@ -1105,8 +1105,6 @@ function activeNav() {
 
 function navigate(page, replace = false) {
     if (current === 'whos-that-pokemon' && page !== current) {
-        whosThatPokemonCry?.pause();
-        whosThatPokemonCry = null;
         whosThatPokemonFactRequest++;
     }
     current = page;
@@ -3522,22 +3520,7 @@ let whosThatPokemonSeen = new Set();
 let whosThatPokemonScore = 0;
 let whosThatPokemonRound = 0;
 let whosThatPokemonFactRequest = 0;
-let whosThatPokemonCry;
 let whosThatPokemonMode = 'crop';
-
-function playWhosThatPokemonCry(pokemon) {
-    whosThatPokemonCry?.pause();
-    whosThatPokemonCry = new Audio(
-        `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemon.id}.ogg`
-    );
-    const audio = whosThatPokemonCry;
-    audio.addEventListener('ended', () => {
-        if (whosThatPokemonCry === audio) whosThatPokemonCry = null;
-    }, { once: true });
-    audio.play().catch(() => {
-        if (whosThatPokemonCry === audio) whosThatPokemonCry = null;
-    });
-}
 
 function whosThatPokemonPage(mode = 'crop') {
     whosThatPokemonMode = mode === 'silhouette' ? 'silhouette' : 'crop';
@@ -3600,8 +3583,6 @@ function whosThatPokemonPage(mode = 'crop') {
 }
 
 function startWhosThatPokemonRound() {
-    whosThatPokemonCry?.pause();
-    whosThatPokemonCry = null;
     const pool = list.filter(pokemon => Number.isInteger(pokemon.id) && pokemon.id <= 1025);
     const choicesNode = app.querySelector('[data-who-choices]');
     if (!choicesNode) return;
@@ -3687,7 +3668,6 @@ function startWhosThatPokemonRound() {
             image.alt = cap(displayPokemonName(target.name));
             stage.classList.add('is-revealed');
             app.querySelector('[data-who-next]').hidden = false;
-            playWhosThatPokemonCry(target);
             const resultRequest = ++whosThatPokemonFactRequest;
             showWhosThatPokemonFact(target, resultRequest);
             showWhosThatPokemonTypes(target, resultRequest);
